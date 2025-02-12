@@ -1,0 +1,223 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/minty/bootstrap.min.css">
+    <style>
+        :root {
+            --background-color: #d9dfd2;
+            --text-color: #343a40;
+            --headline-color: #255657;
+            --subheadline-color: #6c757d;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--headline-color);
+        }
+        p, a, li {
+            color: var(--text-color);
+        }
+        .subheadline {
+            color: var(--subheadline-color);
+        }
+        body {
+            font-size: 1.4em;
+            color: var(--text-color);
+            scroll-behavior: smooth; /* This enables smooth scrolling */
+        }
+        .bolder {
+            font-weight: bold;
+        }
+        .social-links a:hover img {
+            transform: scale(1.2);
+            gap: 20px;
+        }
+        @keyframes fadeInFromLeft {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+        @keyframes revealContent {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .background-zero {
+            background-image: url("static/home.png");
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .display-container {
+            background-color: #000000dd;
+            height: 500px; 
+            width: 600px;
+            position: absolute;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container-fluid {
+            height: 600px;
+            /*width: 600px;*/
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .alt-background {
+            background-color: #d9dfd2;
+        }
+
+        .tappeto {
+            width: 500px;
+            margin-left : 20px;
+            margin-right : 20px;
+            color: wheat;
+            box-sizing: border-box;
+            border-radius: 10px;
+            padding: 2%;
+        }
+        .papeto {
+            max-width: 700px;
+            margin-left : 20px;
+            margin-right : 20px;
+            color: wheat;
+            box-sizing: border-box;
+            border-radius: 10px;
+            padding: 2%;
+            display: flex;
+            flex-direction: column;
+            justify-content: right;
+        }
+        .nav-item {
+            display: flex;
+            color: #439698;
+            margin-bottom: 0px;
+        }
+        .navbar {
+            background-color: #d3eaea !important;
+        }
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div style="display: flex; align-items: center">
+            <a class="navbar-brand" href="home.html" style="margin-right : 0px">
+            <img src="static/Logo1b.svg" alt="Brightmol Logo" style="height: 60px; margin-right: 10px;">
+            </a>
+            <a class="navbar-brand bolder" href="home.html" style="font: Sans-serif; font-size: 1.4em;">Brightmol</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <p class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </p>
+                <p class="nav-item">
+                    <a class="nav-link" href="#about-us">About</a>
+                </p>
+                <p class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </p>
+                <p class="nav-item">
+                    <a class="nav-link" href="#contacts">Contacts</a>
+                </p>
+                <!--p>
+                    <a href="mailto:brightmolbiotech@gmail.com">
+                        <img src="static/mail.svg" alt="mail" style="height: 30px; margin-top: 15px;"> 
+                    </a>
+                    <a href="https://www.linkedin.com/company/brightmol-biotech/posts/">
+                        <img src="static/In-logo.png" alt="mail" style="height: 30px; margin-top: 15px;"> 
+                    </a>
+                </p-->
+            </ul>
+        </div>
+    </nav>
+
+    <div class="background-zero">
+        <div class="black-overlay display-container">
+            <div class="tappeto">
+                <h2 style="font-size: 3em; color: wheat;">Where speed meets precision in drug discovery</h2>
+            </div>
+            <!--div class="tappeto social-links" style="text-align: center; width : 250px;">
+                <span style="margin-bottom: 10px;">contact us:</span><br>
+                <a href="mailto:brightmolbiotech@gmail.com">
+                    <img src="static/mailG.svg" alt="mail" style="height: 50px;"> 
+                </a>
+                <a href="https://www.linkedin.com/company/brightmol-biotech/posts/">
+                    <img src="static/In-logo.png" alt="linkedin" style="height: 50px;"> 
+                </a>
+            </div-->
+        </div>
+    </div>
+    <div class="diaposa alt-background" id="about-us">
+        <div class="container-fluid alt-background">
+            <div class="papeto" style="margin-left : 100px">
+                <h1>About us</h1>
+                <span style="color : #5a5a5a; display : flex; width: 600px;">The founding team combines advanced scientific expertise in chemistry, biology, and bioinformatics.
+                    Currently, BrightMol consists of four partners and colleagues who have been working together daily for years.
+                    We are currently seeking a seed fund to accelerate the development of our platform,
+                    expand our research and development capabilities,
+                    and bring our innovative drug discovery solutions to market.
+                </span>
+            </div>
+            <div class="papeto">
+                <img src="static/about_us.jpg" style="height: 500px; border-radius: 15px;">
+            </div>
+        </div>
+    </div>
+    <div class="diaposa" id="services"> 
+        <div class="container-fluid">
+            <div class="papeto">
+                <img src="static/services.jpg" style="height: 500px; border-radius: 15px;">
+            </div>
+            <div class="papeto" style="margin-right : 100px;">
+                <h1>Services</h1>
+                <span style="color : #5a5a5a;">BrightMol addresses the limitations in the development of
+                    degraders with an innovative platform designed specifically to accelerate drug discovery. 
+                    The technology allows for the rapid, precise, and specific monitoring of the degradation
+                    action of malfunctioning proteins in certain diseases.
+                    It also enables the evaluation of the activity of classical inhibitors developed using
+                    traditional pharmacological approaches, enhancing its versatility.</span>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="diaposa alt-background" id="contacts">
+        <div class="container-fluid alt-background">
+            <div class="papeto" style="margin-left : 100px">
+                <h1>Contacts</h1>
+                <span style="color : #5a5a5a;">We’d love to hear from you! Whether you have a question, need more information about our services, or want to share feedback, our team is here to help. Please reach out to us using the contact us trough our social or email us to <b>brightmolbiotech@gmail.com</b></span>
+            </div>
+            <div class="papeto social-links" style="background-image: url('static/AC_fluo10.png'); justify-content: center; flex-direction: row; padding-top : 100px; padding-bottom : 100px; padding-right : 100px; padding-left : 100px; border-radius: 30px;">
+                <a href="mailto:brightmolbiotech@gmail.com">
+                    <img src="static/mailG.svg" alt="mail" style="height: 80px; margin-right: 30px;"> 
+                </a>
+                <a href="https://www.linkedin.com/company/brightmol-biotech/">
+                    <img src="static/In-logo.png" alt="linkedin" style="height: 80px;"> 
+                </a>
+                <!--img src="static/AC_fluo10.png" style="height: 500px; border-radius: 15px;"-->
+            </div>
+        </div>
+    </div>
+
+<footer style="background-color: #ffffff; text-align: center; padding-top: 20px; padding-bottom: 20px;">
+    <span style="color: #5a5a5a;">&copy; 2025 Brightmol Biotech. All rights reserved.</span>
+</footer>
+</body>
