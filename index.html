@@ -160,7 +160,6 @@
             .half-contact {
                 padding : 5%;
                 border-radius: 15px;
-                min-width: 300px;
                 margin : 3%;
                 display : flex;
                 flex-direction: row;
@@ -187,7 +186,9 @@
                 height: 40px;
             }
             .half-contact {
-                padding : 5%; 
+                padding : 5%;
+                min-width: none;
+                width : 50%;
             }
             .black-overlay {
                 width: 100%;
@@ -207,7 +208,9 @@
                 font-size: 2em;
             }
             .half-contact {
-                width: 80%;
+                width: 60%;
+                min-width: none;
+                margin : none;
             }
             .display-container {
                 height: 300px;
@@ -295,7 +298,7 @@
             <h1>Contacts</h1>
             <span style="color : #5a5a5a;">We’d love to hear from you! Whether you have a question, need more information about our services, or want to share feedback, our team is here to help. Please reach out to us using the contact us trough our social or email us to <b>brightmolbiotech@gmail.com</b></span>
         </div>
-        <div class="half-pics half-contact" style="background-image: url('static/AC_fluo10.png');">
+        <div class="half-contact" style="background-image: url('static/AC_fluo10.png');">
             <a href="mailto:brightmolbiotech@gmail.com">
                 <img class="contact" src="static/mailG.svg" alt="mail" style="margin-right: 30px;"> 
             </a>
