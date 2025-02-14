@@ -87,7 +87,7 @@
             border-radius: 10px;
             padding: 2%;
         }
-        .half-story {
+        .half-story, .half-pic {
             max-width: 700px;
             margin-left : 20px;
             margin-right : 20px;
@@ -98,6 +98,11 @@
             display: flex;
             flex-direction: column;
             justify-content: right;
+        }
+        .half-pic img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
         }
         .nav-item {
             display: flex;
@@ -116,10 +121,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div style="display: flex; align-items: center">
-            <a class="navbar-brand" href="index.html" style="margin-right : 0px">
+            <a class="navbar-brand" href="home.html" style="margin-right : 0px">
             <img src="static/logomini.svg" alt="Brightmol Logo" style="height: 60px; margin-right: 10px;">
             </a>
-            <!--a class="navbar-brand bolder" href="index.html" style="font: Sans-serif; font-size: 1.4em;">Brightmol</a-->
+            <!--a class="navbar-brand bolder" href="home.html" style="font: Sans-serif; font-size: 1.4em;">Brightmol</a-->
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -160,14 +165,14 @@
                     and bring our innovative drug discovery solutions to market.
                 </span>
             </div>
-            <div class="half-story">
+            <div class="half-pic">
                 <img src="static/about_us.jpg" style="height: 500px; border-radius: 15px;">
             </div>
         </div>
     </div>
     <div class="diaposa" id="services"> 
         <div class="container-fluid">
-            <div class="half-story">
+            <div class="half-pic">
                 <img src="static/services.jpg" style="height: 500px; border-radius: 15px;">
             </div>
             <div class="half-story" style="margin-right : 100px;">
@@ -183,7 +188,7 @@
     </div>
 </div>
     <div class="diaposa alt-background" id="contacts">
-        <div class="container-fluid alt-background">
+        <div class="container-fluid alt-background conta-cts-iner">
             <div class="half-story" style="margin-left : 100px">
                 <h1>Contacts</h1>
                 <span style="color : #5a5a5a;">We’d love to hear from you! Whether you have a question, need more information about our services, or want to share feedback, our team is here to help. Please reach out to us using the contact us trough our social or email us to <b>brightmolbiotech@gmail.com</b></span>
