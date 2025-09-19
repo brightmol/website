@@ -89,10 +89,25 @@
             display: flex;
             align-items: center;
         }
+        .nav-contact {
+            justify-content: center;
+            flex-direction: row; 
+            border-radius: 30px;
+            max-height: 60px;
+            margin : none;
+            display: flex;
+            align-items: center;
+            padding : 5px;
+            height: 80px;
+        }
         .contact {
             height: 80px;
         }
         .half-contact a:hover img {
+            transform: scale(1.2);
+            gap: 20px;
+        }
+        .nav-contact a:hover img {
             transform: scale(1.2);
             gap: 20px;
         }
@@ -163,6 +178,11 @@
                 padding : 5%;
                 border-radius: 15px;
                 margin : 3%;
+                display : flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+            .nav-contact {
                 display : flex;
                 flex-direction: row;
                 justify-content: center;
@@ -246,18 +266,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about-us">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contacts">Contacts</a>
+            <ul class="navbar-nav ml-auto" >
+                <li class="nav-item nav-contact">
+                    <a href="mailto:brightmolbiotech@gmail.com">
+                        <img style="height: 40px;"  src="static/mailG.svg" alt="mail" style="margin-right: 30px;"> 
+                    </a>
+             </li>
+                <li class="nav-item nav-contact">
+                    <a href="https://www.linkedin.com/company/brightmol-biotech/">
+                        <img style="height: 40px;" src="static/In-logo.png" alt="linkedin"> 
+                    </a>   
                 </li>
             </ul>
         </div>
