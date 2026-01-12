@@ -7,156 +7,120 @@
   <link rel="icon" href="static/Logo1c.svg" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/styles.css" />
 <style>
-  body {
+body {
     font-family: 'Source Sans Pro', sans-serif;
   }
 </style>
 </head>
-<body class="bg-white text-gray-800">
 
-  <!-- Navbar -->
-  <nav class="flex items-center justify-between px-6 py-4 bg-[#d3eaea] shadow-sm">
+<body>
+  <nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-[#d3eaea] shadow-sm">
     <div class="flex items-center space-x-2">
       <img src="static/Logo1c.svg" alt="BrightMol" class="h-10" />
 
       <span class="font-semibold text-lg text-[#255657]" style="font-size: 1.5rem; font-family: 'Quicksand', sans-serif">BrightMol</span>
     </div>
-    <div class="flex items-center space-x-5">
-      <a href="mailto:brightmolbiotech@gmail.com">
-        <img src="static/mailG.svg" alt="mail" class="h-8 transition-transform hover:scale-110" />
-      </a>
-      <a href="https://www.linkedin.com/company/brightmol-biotech/">
-        <img src="static/In-logo.png" alt="LinkedIn" class="h-8 transition-transform hover:scale-110" />
-      </a>
-    </div>
+ <div class="flex items-center space-x-5" id="contact-icons">
+  <a href="mailto:brightmolbiotech@gmail.com">
+    <img src="static/mailG.svg"
+         alt="mail"
+         class="h-8 transition-transform hover:scale-110 contact-icon" />
+  </a>
+  <a href="https://www.linkedin.com/company/brightmol-biotech/">
+    <img src="static/In-logo.png"
+         alt="LinkedIn"
+         class="h-8 transition-transform hover:scale-110 contact-icon" />
+  </a>
+</div>
   </nav>
-
-<!-- Hero -->
-<section class="relative bg-cover bg-center h-[70vh]" style="background-image: url('static/home.png')">
-  <div class="absolute inset-0 bg-black/60"></div>
-  <div class="relative flex items-center justify-center h-full px-6">
-    <h1 class="text-4xl md:text-5xl font-bold text-[#d3eaea] max-w-2xl text-center gradient-shine animate-fade-in-up">
-      Where speed meets precision in drug discovery
-    </h1>
-  </div>
-</section>
-
-<style>
-@keyframes fadeInUp {
-  0% {
-    opacity: 0.2;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@media (max-width: 768px) {
-  .half-pic {
-    display: none;
-  }
-}
-@keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
-}
-.gradient-shine {
-  background: linear-gradient(90deg, #d3eaea, #439698, #d3eaea);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
-  padding : 4px;
-}
-@keyframes bgZoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.05); }
-}
-.fadeInScale  {
-  animation: bgZoom 20s ease-in-out infinite alternate;
-}
-@keyframes shine {
-  to { background-position: 200% center; }
-}
-.animate-fade-scale {
-  animation: fadeInScale 1.2s ease-out forwards;
-}
-.animate-fade-in-up {
-  animation: fadeInUp 1.0s ease-out forwards;
-}
-</style>
-  <!-- About -->
-  <section class="py-16 bg-[#d3eaea]">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 items-center">
-      <div>
-        <h2 class="text-3xl font-bold text-[#255657] mb-4">About us</h2>
-        <p class="text-gray-700 leading-relaxed">
-          The founding team combines advanced scientific expertise in chemistry, biology, and bioinformatics.
-          Currently, BrightMol consists of five partners and colleagues who have been working together daily for years.
-          We are currently seeking a seed fund to accelerate the development of our platform,
-          expand our research and development capabilities,
-          and bring our innovative drug discovery solutions to market.
-        </p>
+  <main class="slides">
+    <section id="intro" class="slide intro relative bg-cover bg-center h-[90vh]" style="background-image: url('static/home.png')">
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative flex items-center justify-center h-full px-6">
+        <h1 class="text-4xl md:text-5xl font-bold text-[#d3eaea] max-w-2xl text-center gradient-shine animate-fade-in-up">
+          Where speed meets precision in drug discovery
+        </h1>
       </div>
-      <div>
-        <img src="static/about_us.jpg" alt="About us" class="half-pic rounded-2xl shadow-lg" />
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-[#d3eaea] opacity-80">
+        <span class="text-sm mb-2 tracking-wide">Scroll</span>
+        <div class="w-6 h-10 border-2 border-[#d3eaea] rounded-full flex justify-center">
+          <div class="w-1.5 h-1.5 bg-[#d3eaea] rounded-full mt-2 animate-scroll-dot"></div>
+        </div>
       </div>
+    </section>
+
+  <section id="pitch" class="slide relative overflow-hidden">
+    
+    <!-- Background watermark / uniform background -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none bg-[#ededf0]">
+      <!--img src="PITCHDECK.svg" alt="PITCH DECK" style="height: 100%; object-fit: cover; object-position: center;"/-->
     </div>
+    <div class="canva-container relative z-10">
+      <iframe
+        loading="lazy"
+        src="https://www.canva.com/design/DAG97Se0Lfk/VMrFbB9OF3GkuBRunE-X5Q/view?embed"
+        allowfullscreen>
+      </iframe>
+    </div>
+
   </section>
 
-  <!-- Services -->
-  <section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 items-center">
-      <div>
-        <img src="static/services.jpg" alt="Services" class="half-pic rounded-2xl shadow-lg blur-[2px]" />
-      </div>
-      <div>
-        <h2 class="text-3xl font-bold text-[#255657] mb-4">Services</h2>
-        <p class="text-gray-700 leading-relaxed">
-          BrightMol addresses the limitations in the development of degraders with an innovative platform designed 
-          specifically to accelerate drug discovery. The technology allows for the 
-          <span class="font-semibold">rapid, precise, and specific monitoring of the degradation</span>
-          action of malfunctioning proteins in certain diseases.
-          It also enables the evaluation of the activity of classical inhibitors developed using
-          traditional pharmacological approaches, enhancing its versatility.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contacts -->
-  <section class="py-16 bg-[#d3eaea]">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 items-center">
-      <div>
-        <h2 class="text-3xl font-bold text-[#255657] mb-4">Contacts</h2>
-        <p class="text-gray-700 leading-relaxed">
-          We’d love to hear from you! Whether you have a question, need more information about our services, 
-          or want to share feedback, our team is here to help. 
-          Please reach out to us using the contact icons or email us at 
+<section id="contacts"  class="slide py-16 bg-[#599497] h-screen">
+  <div class="flex flex-col h-full section-content">
+    <div class="flex-1 flex items-center justify-center contact-content">
+      <div class="mx-auto px-6 text-center text-full-slide-borders">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#d3eaea] text-center justify-center">
+          Contacts
+        </h1>
+        <p class="leading-relaxed text-full-slide text-[#e0f2f2]">
+          We’d love to hear from you! Whether you have a question, need more information
+          about our services, or want to share feedback, our team is here to help.
+          Please reach out to us using the contact icons or email us at
           <span class="font-semibold">brightmolbiotech@gmail.com</span>.
         </p>
       </div>
-      <div class="flex space-x-8 justify-center bg-white/70 rounded-2xl p-8 shadow-lg">
-        <a href="mailto:brightmolbiotech@gmail.com">
-          <img src="static/mailG.svg" alt="mail" class="h-12 transition-transform hover:scale-125" />
-        </a>
-        <a href="https://www.linkedin.com/company/brightmol-biotech/">
-          <img src="static/In-logo.png" alt="linkedin" class="h-12 transition-transform hover:scale-125" />
-        </a>
-      </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-white py-6 border-t border-gray-200">
-    <div class="flex flex-row justify-center items-center space-x-2">
-      <img src="static/Logo1c.svg" alt="BrightMol" class="h-12" />
-      <p class="text-gray-600 text-sm">&copy; 2025 BrightMol Biotech. All rights reserved.</p>
-      <img src="static/Logo1c.svg" alt="BrightMol" class="h-12" />
+    <div class="mt-auto pb-4 px-6 text-sm text-[#a1d2d4] flex-row footer-piva justify-space-around">
+      <div class="px-1">BrightMol Biotech S.r.l</div>
+      <div class="px-1">Via G. Sebesta 15, San Michele All’Adige, 38010 (TN) Italy</div>  
+      <div class="px-1">Capitale sociale 10.000,00 €</div>
+      <div class="px-1">P.IVA 02817680222</div>
     </div>
-  </footer>
 
+  </div>
+</section>
+</main>
 </body>
+<script>
+  const contactSlide = document.getElementById('contacts');
+  const icons = document.querySelectorAll('.contact-icon');
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        icons.forEach(icon => {
+          // sleep half a second before animating
+          setTimeout(() => {
+            icon.classList.remove('animate-attention');
+            void icon.offsetWidth; 
+            icon.classList.add('animate-attention');
+          }, 500);
+          setTimeout(() => {
+            icon.classList.remove('animate-attention');
+            void icon.offsetWidth; 
+            icon.classList.add('animate-attention');
+          }, 1050);
+        });
+      }
+    },
+    {
+      threshold: 0.6
+    }
+  );
+
+  observer.observe(contactSlide);
+</script>
+
 </html>
