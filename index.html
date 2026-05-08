@@ -5,59 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BrightMol Biotech</title>
   <link rel="icon" href="static/Logo1c.svg" type="image/x-icon" />
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="static/styles.css" />
-<style>
-body {
-    font-family: 'Source Sans Pro', sans-serif;
-  }
-</style>
 </head>
 
 <body>
-  <nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-[#d3eaea] shadow-sm">
-    <div class="flex items-center space-x-2">
-      <img src="static/Logo1c.svg" alt="BrightMol" class="h-10" />
+  <nav class="navbar">
+    <div class="brand">
+      <img src="static/Logo1c.svg" alt="BrightMol" class="brand-logo" />
 
-      <span class="font-semibold text-lg text-[#255657]" style="font-size: 1.5rem; font-family: 'Quicksand', sans-serif">BrightMol</span>
+      <span class="brand-name">BrightMol</span>
     </div>
- <div class="flex items-center space-x-5" id="contact-icons">
+ <div class="contact-icons" id="contact-icons">
   <a href="mailto:brightmolbiotech@gmail.com">
     <img src="static/mailG.svg"
          alt="mail"
-         class="h-8 transition-transform hover:scale-110 contact-icon" />
+         class="contact-icon" />
   </a>
   <a href="https://www.linkedin.com/company/brightmol-biotech/">
     <img src="static/In-logo.png"
          alt="LinkedIn"
-         class="h-8 transition-transform hover:scale-110 contact-icon" />
+         class="contact-icon" />
   </a>
 </div>
   </nav>
   <main class="slides">
-    <section id="intro" class="slide intro relative bg-cover bg-center h-[90vh]" style="background-image: url('static/home.png')">
-      <div class="absolute inset-0 bg-black/60"></div>
-      <div class="relative flex items-center justify-center h-full px-6">
-        <h1 class="text-4xl md:text-5xl font-bold text-[#d3eaea] max-w-2xl text-center gradient-shine animate-fade-in-up">
+    <section id="intro" class="slide intro" style="background-image: url('static/home.png')">
+      <div class="intro-overlay"></div>
+      <div class="intro-content">
+        <h1 class="hero-title gradient-shine animate-fade-in-up">
           Where speed meets precision in drug discovery
         </h1>
       </div>
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-[#d3eaea] opacity-80">
-        <span class="text-sm mb-2 tracking-wide">Scroll</span>
-        <div class="w-6 h-10 border-2 border-[#d3eaea] rounded-full flex justify-center">
-          <div class="w-1.5 h-1.5 bg-[#d3eaea] rounded-full mt-2 animate-scroll-dot"></div>
+      <div class="scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-mouse">
+          <div class="scroll-dot"></div>
         </div>
       </div>
     </section>
 
-  <section id="pitch" class="slide relative overflow-hidden">
-    
-    <!-- Background watermark / uniform background -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none bg-[#ededf0]">
+  <section id="pitch" class="slide pitch">
+    <div class="pitch-backdrop">
       <!--img src="PITCHDECK.svg" alt="PITCH DECK" style="height: 100%; object-fit: cover; object-position: center;"/-->
     </div>
-    <div class="canva-container relative z-10">
+    <div class="canva-container">
       <iframe
         loading="lazy"
         src="https://www.canva.com/design/DAG97Se0Lfk/VMrFbB9OF3GkuBRunE-X5Q/view?embed"
@@ -67,28 +59,27 @@ body {
 
   </section>
 
-<section id="contacts"  class="slide py-16 bg-[#599497] h-screen">
-  <div class="flex flex-col h-full section-content">
-    <div class="flex-1 flex items-center justify-center contact-content">
-      <div class="mx-auto px-6 text-center text-full-slide-borders">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#d3eaea] text-center justify-center">
+<section id="contacts" class="slide contacts">
+  <div class="section-content">
+    <div class="contact-spacer"></div>
+    <div class="contact-content">
+      <div class="contact-copy">
+        <h1 class="contacts-title">
           Contacts
         </h1>
-        <p class="leading-relaxed text-full-slide text-[#e0f2f2]">
+        <p class="contacts-text">
           We’d love to hear from you! Whether you have a question, need more information
           about our services, or want to share feedback, our team is here to help.
           Please reach out to us using the contact icons or email us at
-          <span class="font-semibold">brightmolbiotech@gmail.com</span>.
+          <span class="contacts-email">info@brightmol.com</span>.
         </p>
       </div>
+    </div>    <div class="footer-spacer"></div>    <div class="footer-piva">
+      <div>BrightMol Biotech S.r.l</div>
+      <div>Via G. Sebesta 15, San Michele All’Adige, 38010 (TN) Italy</div>
+      <div>Capitale sociale 10.000,00 €</div>
+      <div>P.IVA 02817680222</div>
     </div>
-    <div class="mt-auto pb-4 px-6 text-sm text-[#a1d2d4] flex-row footer-piva justify-space-around">
-      <div class="px-1">BrightMol Biotech S.r.l</div>
-      <div class="px-1">Via G. Sebesta 15, San Michele All’Adige, 38010 (TN) Italy</div>  
-      <div class="px-1">Capitale sociale 10.000,00 €</div>
-      <div class="px-1">P.IVA 02817680222</div>
-    </div>
-
   </div>
 </section>
 </main>
@@ -101,7 +92,6 @@ body {
     ([entry]) => {
       if (entry.isIntersecting) {
         icons.forEach(icon => {
-          // sleep half a second before animating
           setTimeout(() => {
             icon.classList.remove('animate-attention');
             void icon.offsetWidth; 
