@@ -708,7 +708,6 @@ a {
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
-.person-card:hover .person-photo,
 .person-card.is-open .person-photo {
   transform: scale(1.04);
   box-shadow: 0 12px 28px rgba(24, 53, 54, 0.22);
@@ -755,12 +754,10 @@ a {
   transition: transform 220ms ease;
 }
 
-.person-card:hover .person-hint,
 .person-card.is-open .person-hint {
   opacity: 1;
 }
 
-.person-card:hover .person-hint .chevron,
 .person-card.is-open .person-hint .chevron {
   transform: rotate(180deg);
 }
@@ -795,7 +792,6 @@ a {
   border-bottom-color: var(--bg);
 }
 
-.person-card:hover .person-bio,
 .person-card:focus-visible .person-bio,
 .person-card.is-open .person-bio {
   opacity: 1;
@@ -973,17 +969,26 @@ a {
   animation: popAttention 0.6s ease-in-out;
 }
 
-/* media pointer touch */
-@media (pointer: coarse) {
-  .person-card:hover .person-bio,
-  .person-card:focus-visible .person-bio {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateX(var(--bio-shift-x, -50%)) translateY(-6px);
+/* Hover effects are OPT-IN, only for devices with a real hovering pointer.
+   Everything above is driven by .is-open (added by the click handler), which
+   works on mouse and touch alike. Previously this was inverted: hover was the
+   default and a `@media (pointer: coarse)` block tried to undo it on touch —
+   which broke on any device that doesn't report itself as coarse. */
+@media (hover: hover) and (pointer: fine) {
+  .person-card:hover .person-photo {
+    transform: scale(1.04);
+    box-shadow: 0 12px 28px rgba(24, 53, 54, 0.22);
   }
 
-  .person-card.is-open .person-bio {
+  .person-card:hover .person-hint {
+    opacity: 1;
+  }
+
+  .person-card:hover .person-hint .chevron {
+    transform: rotate(180deg);
+  }
+
+  .person-card:hover .person-bio {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;

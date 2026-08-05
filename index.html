@@ -323,7 +323,7 @@
             </div>
             <h3 class="person-name">Dino Gasparotto</h3>
             <p class="person-title">Co-founder, Scientific Board</p>
-            <span classgit log --oneline -5="person-hint">
+            <span class="person-hint">
               Bio
               <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -537,25 +537,31 @@
     card.addEventListener('focus', () => positionPersonBio(card));
   });
 
-  if (window.matchMedia('(pointer: coarse)').matches) {
-    document.querySelectorAll('.person-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const isOpen = card.classList.contains('is-open');
-        document.querySelectorAll('.person-card.is-open').forEach(open => open.classList.remove('is-open'));
-        const willOpen = !isOpen;
-        card.classList.toggle('is-open', willOpen);
-        if (willOpen) positionPersonBio(card);
-      });
-    });
+  // Click-to-open is for devices WITHOUT a real hovering pointer only.
+  // This is the exact same query the CSS uses to enable :hover on .person-card,
+  // so the two can never disagree. It is checked at click time rather than at
+  // load time, so plugging in a mouse (or DevTools device emulation) is picked
+  // up immediately instead of being baked in when the page loaded.
+  const personHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
 
-    document.addEventListener('click', (event) => {
-      document.querySelectorAll('.person-card.is-open').forEach(card => {
-        if (!card.contains(event.target)) {
-          card.classList.remove('is-open');
-        }
-      });
+  document.querySelectorAll('.person-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (personHoverQuery.matches) return; // hover already reveals the bio
+      const isOpen = card.classList.contains('is-open');
+      document.querySelectorAll('.person-card.is-open').forEach(open => open.classList.remove('is-open'));
+      const willOpen = !isOpen;
+      card.classList.toggle('is-open', willOpen);
+      if (willOpen) positionPersonBio(card);
     });
-  }
+  });
+
+  document.addEventListener('click', (event) => {
+    document.querySelectorAll('.person-card.is-open').forEach(card => {
+      if (!card.contains(event.target)) {
+        card.classList.remove('is-open');
+      }
+    });
+  });
 </script>
 
 </html>
