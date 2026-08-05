@@ -537,16 +537,14 @@
     card.addEventListener('focus', () => positionPersonBio(card));
   });
 
-  // Click-to-open is for devices WITHOUT a real hovering pointer only.
-  // This is the exact same query the CSS uses to enable :hover on .person-card,
-  // so the two can never disagree. It is checked at click time rather than at
-  // load time, so plugging in a mouse (or DevTools device emulation) is picked
-  // up immediately instead of being baked in when the page loaded.
-  const personHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+  let lastPointerType = '';
+  document.addEventListener('pointerdown', event => {
+    lastPointerType = event.pointerType;
+  }, true);
 
   document.querySelectorAll('.person-card').forEach(card => {
     card.addEventListener('click', () => {
-      if (personHoverQuery.matches) return; // hover already reveals the bio
+      if (lastPointerType === 'mouse') return;
       const isOpen = card.classList.contains('is-open');
       document.querySelectorAll('.person-card.is-open').forEach(open => open.classList.remove('is-open'));
       const willOpen = !isOpen;
