@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BrightMol Biotech</title>
+  <title>BrightMol Biotech - Cell-Based Screening & Drug Validation Services</title>
+  <meta name="description" content="BrightMol Biotech partners with pharma and biotech companies to accelerate early-stage drug discovery through real-time, cell-based protein screening and validation." />
   <link rel="icon" href="static/Logo1c.svg" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="static/styles.css" />
@@ -19,31 +20,66 @@
 
 <body>
   <nav class="navbar">
-    <div class="brand">
+    <a href="#home" class="brand">
       <img src="static/Logo1c.svg" alt="BrightMol" class="brand-logo" />
-
       <span class="brand-name">BrightMol</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navPanel">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-panel" id="navPanel">
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#technology" class="nav-link">Technology</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link nav-dropdown-toggle" id="servicesToggle" aria-expanded="false" aria-controls="servicesMenu">
+            Services
+            <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="nav-dropdown-menu" id="servicesMenu">
+            <li><a href="#service-hit-id">Hit Identification &amp; Target Screening</a></li>
+            <li><a href="#service-validation">Drug Candidate Validation &amp; Custom Assays</a></li>
+            <li><a href="#service-moa">MoA Studies &amp; Hit-to-Lead Optimization</a></li>
+            <li><a href="#service-toxicity">Early Preliminary Toxicity Assays</a></li>
+          </ul>
+        </li>
+        <li><a href="#people" class="nav-link">People</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
     </div>
- <div class="contact-icons" id="contact-icons">
-  <a href="mailto:brightmolbiotech@gmail.com">
-    <img src="static/mailG.svg"
-         alt="mail"
-         class="contact-icon" />
-  </a>
-  <a href="https://www.linkedin.com/company/brightmol-biotech/">
-    <img src="static/In-logo.png"
-         alt="LinkedIn"
-         class="contact-icon" />
-  </a>
-</div>
+
+    <div class="contact-icons" id="contact-icons">
+      <a href="mailto:info@brightmol.com">
+        <img src="static/mailG.svg" alt="mail" class="contact-icon" />
+      </a>
+      <a href="https://www.linkedin.com/company/brightmol-biotech/">
+        <img src="static/In-logo.png" alt="LinkedIn" class="contact-icon" />
+      </a>
+    </div>
   </nav>
+
   <main class="slides">
-    <section id="intro" class="slide intro" style="background-image: url('static/home.png')">
+
+    <section id="home" class="slide intro" style="background-image: url('static/home.png')">
       <div class="intro-overlay"></div>
       <div class="intro-content">
+        <!-- <p class="eyebrow animate-fade-in-up">Academic Spin-off · University of Trento</p> -->
         <h1 class="hero-title gradient-shine animate-fade-in-up">
           Where speed meets precision in drug discovery
         </h1>
+        <p class="hero-subtitle animate-fade-in-up">
+          We help pharmaceutical and biotech teams validate promising drug candidates faster,
+          with real-time, cell-based screening built around your target.
+        </p>
+        <div class="hero-actions animate-fade-in-up">
+          <a href="#services" class="btn btn-primary">Explore Our Services</a>
+          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        </div>
       </div>
       <div class="scroll-cue">
         <span>Scroll</span>
@@ -53,47 +89,329 @@
       </div>
     </section>
 
-  <section id="pitch" class="slide pitch">
-    <div class="pitch-backdrop">
-      <!--img src="PITCHDECK.svg" alt="PITCH DECK" style="height: 100%; object-fit: cover; object-position: center;"/-->
-    </div>
-    <div class="canva-container">
-      <iframe
-        loading="lazy"
-        src="https://www.canva.com/design/DAG97Se0Lfk/VMrFbB9OF3GkuBRunE-X5Q/view?embed"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-  </section>
-
-<section id="contacts" class="slide contacts">
-  <div class="section-content">
-    <div class="contact-spacer"></div>
-    <div class="contact-content">
-      <div class="contact-copy">
-        <h1 class="contacts-title">
-          Contacts
-        </h1>
-        <p class="contacts-text">
-          We’d love to hear from you! Whether you have a question, need more information
-          about our services, or want to share feedback, our team is here to help.
-          Please reach out to us using the contact icons or email us at
-          <span class="contacts-email">info@brightmol.com</span>.
+    <section id="about" class="slide about">
+      <div class="about-media">
+        <img src="static/IMG1.png" alt="Fluorescence imaging of live cells used in LIPS screening" />
+      </div>
+      <div class="section-content about-content">
+        <p class="section-eyebrow">About Us</p>
+        <h2 class="section-title">Bridging computational design and biological reality</h2>
+        <p class="section-lede">
+          BrightMol Biotech is an academic spin-off from the University of Trento, founded in 2025
+          to accelerate early-stage drug discovery. We bridge the gap between computational drug
+          design and biological validation through our proprietary LIPS technology, enabling
+          real-time monitoring of target proteins inside living cells.
+        </p>
+        <p class="section-body">
+          By providing faster, more informative, and cost-effective cell-based assays, we help
+          pharmaceutical and biotechnology companies identify promising drug candidates earlier,
+          reduce development risk, and make better R&amp;D decisions. Our long-term vision is to
+          transform biological validation into a faster, smarter, and more predictive process -
+          accelerating the development of new therapies for patients worldwide.
         </p>
       </div>
-    </div>    <div class="footer-spacer"></div>    <div class="footer-piva">
-      <div>BrightMol Biotech S.r.l</div>
-      <div>Via G. Sebesta 15, San Michele All’Adige, 38010 (TN) Italy</div>
-      <div>Capitale sociale 10.000,00 €</div>
-      <div>P.IVA 02817680222</div>
-    </div>
-  </div>
-</section>
-</main>
+    </section>
+
+    <section id="technology" class="slide technology">
+      <div class="section-content">
+        <p class="section-eyebrow">Our Technology</p>
+        
+        <div class="tech-grid">
+          <div class="tech-copy">
+            <h2 class="section-title">LIPS: Light Identification of Protein Suppressors</h2>
+            <p class="section-body">
+              LIPS is a novel phenotypic screening platform that rapidly identifies bioactive
+              molecules capable of modulating the stability and expression levels of specific
+              target proteins, directly within their native intracellular environment.
+            </p>
+            <p class="section-body">
+              By shifting from static endpoint measurements to real-time monitoring and
+              multiparametric readouts, LIPS lets pharma R&amp;D teams make earlier, more robust,
+              and highly informed go/no-go decisions.
+            </p>
+          </div>
+          <div class="tech-results">
+            <div class="stat-row">
+              <div class="stat-card">
+                <span class="stat-value">4x</span>
+                <span class="stat-label">Increased speed<br />2-4 weeks vs. 2-4 months</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">50%</span>
+                <span class="stat-label">Cost reduction<br />$1,000-$2,000 per validated hit</span>
+              </div>
+            </div>
+            <div class="compare-table-wrap">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th>Service Feature</th>
+                    <th>Traditional CROs</th>
+                    <th>BrightMol Biotech (LIPS)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Screening timelines</td>
+                    <td>2-4 months</td>
+                    <td>2-4 weeks</td>
+                  </tr>
+                  <tr>
+                    <td>Average cost per hit</td>
+                    <td>$2,000-$4,000</td>
+                    <td>$1,000-$2,000</td>
+                  </tr>
+                  <tr>
+                    <td>Assay methodology</td>
+                    <td>Static endpoint assays</td>
+                    <td>Real-time protein monitoring</td>
+                  </tr>
+                  <tr>
+                    <td>Readout type</td>
+                    <td>Single-point readout</td>
+                    <td>Advanced multiparametric readout</td>
+                  </tr>
+                  <tr>
+                    <td>Biological relevance</td>
+                    <td>Low-medium (artificial systems)</td>
+                    <td>High (native cellular context)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="slide services">
+      <div class="section-content">
+        <p class="section-eyebrow">What We Do</p>
+        <h2 class="section-title">Service packages for the pharmaceutical industry</h2>
+        <p class="section-lede">
+          Four project types, each designed to plug into a different stage of your discovery
+          pipeline - from first screen to lead optimization.
+        </p>
+
+        <div class="services-grid">
+          <article id="service-hit-id" class="service-card">
+            <span class="service-number">01</span>
+            <h3>Hit Identification &amp; Target Screening</h3>
+            <p class="service-tagline">Accelerated discovery and identification of novel bioactive molecules</p>
+            <button class="service-toggle" aria-expanded="false">
+              <span>View project details</span>
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="service-details">
+              <ul class="service-list">
+                <li>High Content Screening (HCS): automated multiparametric screening for synthetic compound libraries and complex natural product extracts</li>
+                <li>CRISPR screening / genetic modulators to decipher target interactions with protein stability pathways</li>
+                <li>Customized screening campaigns designed around your specific target of interest</li>
+              </ul>
+            </div>
+          </article>
+
+          <article id="service-validation" class="service-card">
+            <span class="service-number">02</span>
+            <h3>Drug Candidate Validation &amp; Custom Assays</h3>
+            <p class="service-tagline">Functional validation and high-fidelity biological contextualization of your leads</p>
+            <button class="service-toggle" aria-expanded="false">
+              <span>View project details</span>
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="service-details">
+              <ul class="service-list">
+                <li>Custom cell-based assays: in-house engineering of cell lines tailored to monitor real-time protein degradation or stabilization</li>
+                <li>High-fidelity validation of drug candidates in advanced cell-based assays</li>
+                <li>Dose-response activity evaluation to calculate the EC₅₀ of active compounds</li>
+              </ul>
+            </div>
+          </article>
+
+          <article id="service-moa" class="service-card">
+            <span class="service-number">03</span>
+            <h3>MoA Studies &amp; Hit-to-Lead Optimization</h3>
+            <p class="service-tagline">Deep pharmacodynamic insights and molecular refinement</p>
+            <button class="service-toggle" aria-expanded="false">
+              <span>View project details</span>
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="service-details">
+              <ul class="service-list">
+                <li>Characterization of cell signaling pathways and interaction kinetics with the target protein</li>
+                <li>Hit-to-lead optimization: iterative biological and analytical support to develop analogs with improved potency and selectivity</li>
+              </ul>
+            </div>
+          </article>
+
+          <article id="service-toxicity" class="service-card">
+            <span class="service-number">04</span>
+            <h3>Early Preliminary Toxicity Assays</h3>
+            <p class="service-tagline">Timely pipeline de-risking to prevent late-stage developmental failures</p>
+            <button class="service-toggle" aria-expanded="false">
+              <span>View project details</span>
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="service-details">
+              <ul class="service-list">
+                <li>Preliminary in vitro cytotoxicity assessment across healthy human cell lines</li>
+                <li>Monitoring of compound-induced phenotypic alterations and cellular stress via High Content Imaging</li>
+                <li>Early toxicity metrics for preliminary LD₅₀ calculation in cell models</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="people" class="slide people">
+      <div class="section-content">
+        <p class="section-eyebrow">Our People</p>
+        <h2 class="section-title">Meet the team behind BrightMol</h2>
+        <div class="people-grid">
+          <article class="person-card" tabindex="0">
+            <div class="person-photo">
+              <img src="static/ilaria-zeni.jpg" alt="Ilaria Zeni" />
+            </div>
+            <h3 class="person-name">Ilaria Zeni, PhD</h3>
+            <p class="person-title">Co-founder, CEO &amp; Scientific Lead</p>
+            <span class="person-hint">
+              Bio
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="person-bio">
+              <p>
+                Pharmacist and PhD in Biomolecular Sciences (University of Trento, CIBIO).
+                Researcher in the Prions &amp; Amyloids Lab and co-inventor of the LIPS technology,
+                focused on drug discovery for neurodegenerative disease.
+              </p>
+            </div>
+          </article>
+          <article class="person-card" tabindex="0">
+            <div class="person-photo">
+              <img src="static/nicole-innocenti.jpg" alt="Nicole Innocenti" />
+            </div>
+            <h3 class="person-name">Nicole Innocenti, PhD</h3>
+            <p class="person-title">Co-founder, Scientific Board</p>
+            <span class="person-hint">
+              Bio
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="person-bio">
+              <p>
+                PhD in Biomolecular Sciences (University of Trento) with a degree in Pharmaceutical
+                Chemistry from UCC Ireland. Specializes in organic synthesis, analytical chemistry
+                and medicinal chemistry.
+              </p>
+            </div>
+          </article>
+          <article class="person-card" tabindex="0">
+            <div class="person-photo">
+              <img src="static/dino-gasparotto.jpg" alt="Dino Gasparotto" />
+            </div>
+            <h3 class="person-name">Dino Gasparotto</h3>
+            <p class="person-title">Co-founder, Scientific Board</p>
+            <span classgit log --oneline -5="person-hint">
+              Bio
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="person-bio">
+              <p>
+                Master's in Molecular and Cellular Biotechnology (University of Trento).Currently a PhD
+                candidate developing a LIPS-based assay targeting alpha-synuclein in Parkinson's
+                disease and a bioinformatic analysis of protein modifications.
+              </p>
+            </div>
+          </article>
+          <article class="person-card" tabindex="0">
+            <div class="person-photo">
+              <img src="static/emiliano-biasini.png" alt="Emiliano Biasini" />
+            </div>
+            <h3 class="person-name">Emiliano Biasini, PhD</h3>
+            <p class="person-title">Co-founder, Chair of Scientific Board</p>
+            <span class="person-hint">
+              Bio
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="person-bio">
+              <p>
+                Associate Professor at the University of Trento, leading the Dulbecco Telethon Lab
+                of Prions and Amyloids. Co-inventor of the LIPS technology and co-founder/CEO of
+                Sibylla Biotech, with 60+ publications and 5 patents.
+              </p>
+            </div>
+          </article>
+          <article class="person-card" tabindex="0">
+            <div class="person-photo">
+              <img src="static/alessandro-tait.jpg" alt="Alessandro Tait" />
+            </div>
+            <h3 class="person-name">Alessandro Tait</h3>
+            <p class="person-title">Co-founder, CFO</p>
+            <span class="person-hint">
+              Bio
+              <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="person-bio">
+              <p>
+                Master's in Management (University of Trento). Seven+ years in finance, spanning
+                portfolio analysis, risk assessment and financial modelling across credit, corporate
+                finance and reinsurance.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="slide contacts">
+      <div class="section-content">
+        <div class="contact-spacer"></div>
+        <div class="contact-content">
+          <div class="contact-copy">
+            <h1 class="contacts-title">Let's build your next validation study</h1>
+            <p class="contacts-text">
+              We're actively partnering with pharmaceutical and biotech companies on collaborative
+              research and co-development projects, and we work with teams looking to integrate
+              LIPS directly into their discovery programs. Reach out to discuss your target.
+            </p>
+            <br>
+            <p class="contacts-text contacts-meta">
+              <span class="contacts-email">info@brightmol.com</span>
+              <!-- &nbsp;·&nbsp; Dr. Ilaria Zeni, CEO &amp; Scientific Lead -->
+            </p>
+          </div>
+        </div>
+        <div class="footer-spacer"></div>
+        <div class="footer-piva">
+          <div>BrightMol Biotech S.r.l</div>
+          <div>Via G. Sebesta 15, San Michele All'Adige, 38010 (TN) Italy</div>
+          <div>Capitale sociale 10.000,00 €</div>
+          <div>P.IVA 02817680222</div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 <script>
-  const contactSlide = document.getElementById('contacts');
+  const contactSlide = document.getElementById('contact');
   const icons = document.querySelectorAll('.contact-icon');
 
   const observer = new IntersectionObserver(
@@ -102,12 +420,12 @@
         icons.forEach(icon => {
           setTimeout(() => {
             icon.classList.remove('animate-attention');
-            void icon.offsetWidth; 
+            void icon.offsetWidth;
             icon.classList.add('animate-attention');
           }, 500);
           setTimeout(() => {
             icon.classList.remove('animate-attention');
-            void icon.offsetWidth; 
+            void icon.offsetWidth;
             icon.classList.add('animate-attention');
           }, 1050);
         });
@@ -119,6 +437,125 @@
   );
 
   observer.observe(contactSlide);
+
+  const navToggle = document.getElementById('navToggle');
+  const navPanel = document.getElementById('navPanel');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navPanel.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navPanel.querySelectorAll('.nav-link:not(.nav-dropdown-toggle)').forEach(link => {
+    link.addEventListener('click', () => {
+      navPanel.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  navPanel.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      navPanel.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      servicesToggle.setAttribute('aria-expanded', 'false');
+      servicesDropdown.classList.remove('is-open');
+    });
+  });
+
+  const servicesToggle = document.getElementById('servicesToggle');
+  const servicesDropdown = servicesToggle.closest('.nav-dropdown');
+
+  servicesToggle.addEventListener('click', () => {
+    const isOpen = servicesDropdown.classList.toggle('is-open');
+    servicesToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!servicesDropdown.contains(event.target)) {
+      servicesDropdown.classList.remove('is-open');
+      servicesToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function openServiceDetails(card) {
+    const toggle = card.querySelector('.service-toggle');
+    const details = card.querySelector('.service-details');
+    toggle.setAttribute('aria-expanded', 'true');
+    details.classList.add('is-open');
+    details.style.maxHeight = details.scrollHeight + 'px';
+  }
+
+  function closeServiceDetails(card) {
+    const toggle = card.querySelector('.service-toggle');
+    const details = card.querySelector('.service-details');
+    toggle.setAttribute('aria-expanded', 'false');
+    details.classList.remove('is-open');
+    details.style.maxHeight = null;
+  }
+
+  document.querySelectorAll('.service-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const card = toggle.closest('.service-card');
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeServiceDetails(card) : openServiceDetails(card);
+    });
+  });
+
+  function openServiceFromHash() {
+    const card = document.querySelector(location.hash);
+    if (card && card.classList.contains('service-card')) {
+      openServiceDetails(card);
+    }
+  }
+
+  window.addEventListener('hashchange', openServiceFromHash);
+  openServiceFromHash();
+
+  function positionPersonBio(card) {
+    const bio = card.querySelector('.person-bio');
+    if (!bio) return;
+    const margin = 16;
+    const cardRect = card.getBoundingClientRect();
+    const bioWidth = bio.getBoundingClientRect().width;
+    const cardCenterX = cardRect.left + cardRect.width / 2;
+
+    let bioLeftPage = cardCenterX - bioWidth / 2;
+    const minLeft = margin;
+    const maxLeft = window.innerWidth - margin - bioWidth;
+    bioLeftPage = Math.min(Math.max(bioLeftPage, minLeft), maxLeft);
+
+    card.style.setProperty('--bio-left', `${bioLeftPage - cardRect.left}px`);
+    card.style.setProperty('--bio-shift-x', '0px');
+
+    let arrowLeft = cardCenterX - bioLeftPage;
+    arrowLeft = Math.min(Math.max(arrowLeft, 14), bioWidth - 14);
+    card.style.setProperty('--arrow-left', `${arrowLeft}px`);
+  }
+
+  document.querySelectorAll('.person-card').forEach(card => {
+    card.addEventListener('mouseenter', () => positionPersonBio(card));
+    card.addEventListener('focus', () => positionPersonBio(card));
+  });
+
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    document.querySelectorAll('.person-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const isOpen = card.classList.contains('is-open');
+        document.querySelectorAll('.person-card.is-open').forEach(open => open.classList.remove('is-open'));
+        const willOpen = !isOpen;
+        card.classList.toggle('is-open', willOpen);
+        if (willOpen) positionPersonBio(card);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      document.querySelectorAll('.person-card.is-open').forEach(card => {
+        if (!card.contains(event.target)) {
+          card.classList.remove('is-open');
+        }
+      });
+    });
+  }
 </script>
 
 </html>
