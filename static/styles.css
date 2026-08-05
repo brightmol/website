@@ -1023,6 +1023,22 @@ a {
 }
 
 @media (max-width: 900px) {
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .hero-subtitle {
+    max-width: 42ch;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3.4vw, 2.75rem);
+  }
+
+  .section-lede {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  }
+
   .tech-grid {
     grid-template-columns: 1fr;
   }
@@ -1116,8 +1132,27 @@ a {
 }
 
 @media (max-width: 768px) {
+  /* MASTER MOBILE SIZE LEVER.
+     Almost every size in this file is in rem, so shrinking the root font-size
+     scales all type, padding, gaps, cards and tables proportionally.
+     Lower the numbers to shrink everything further, raise them to grow it.
+     At a 393px-wide phone this resolves to ~12.6px (desktop default is 16px). */
+  html {
+    font-size: clamp(11px, 3.2vw, 14px);
+  }
+
   :root {
     --nav-height: 76px;
+  }
+
+  /* These two are set in desktop-scale rem (4.5rem / 3rem), so proportional
+     scaling alone still leaves them oversized on a phone. */
+  .hero-title {
+    font-size: clamp(2rem, 8.5vw, 3rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 6.5vw, 2.5rem);
   }
 
   .navbar {
