@@ -996,7 +996,10 @@ a {
   }
 }
 
-@media (max-width: 1400px) {
+/* The ladder used to start at 1400px, which left a 1440px laptop on the full
+   15rem photos. Starts at 1500px now. These must stay in descending order —
+   they are equal specificity, so a later block always wins the overlap. */
+@media (max-width: 1500px) {
   .person-photo {
       width: 14rem;
       height: 14rem;
@@ -1133,6 +1136,20 @@ a {
 
   .nav-dropdown-menu a {
     color: var(--teal-900);
+  }
+}
+
+/* SHORT-VIEWPORT (LAPTOP) SIZE LEVER.
+   This layout is one section per screen, so the binding constraint on a laptop
+   is viewport HEIGHT, not width. A 2880x1620 panel at 200% OS scaling reports
+   1440 x ~710 CSS px: wide enough to clear every width breakpoint above, but
+   ~100px too short to fit Services or the People row plus its bio popover.
+   Same proportional trick as the mobile lever below — one number to tune.
+   At ~710px tall this resolves to ~13px (a full-height desktop stays at 16px).
+   Must stay ABOVE the max-width: 768px block so phones still win on that rule. */
+@media (max-height: 900px) {
+  html {
+    font-size: clamp(11px, 1.85vh, 16px);
   }
 }
 

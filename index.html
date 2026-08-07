@@ -48,7 +48,7 @@
             <li><a href="#service-toxicity">Early Preliminary Toxicity Assays</a></li>
           </ul>
         </li>
-        <li><a href="#people" class="nav-link">People</a></li>
+        <li><a href="#people" class="nav-link" style="display : block;">People</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
@@ -502,7 +502,20 @@
   });
 
   function openServiceFromHash() {
-    const card = document.querySelector(location.hash);
+    // On a plain load with no #fragment, location.hash is '' — and
+    // querySelector('') throws a SyntaxError, which killed every line of script
+    // below this point (including all the person-card handlers). Bail out first.
+    if (!location.hash || location.hash === '#') return;
+
+    // A hash is arbitrary user-controlled text and is not guaranteed to be a
+    // valid CSS selector, so this can still throw on e.g. '#foo bar' or '#1x'.
+    let card = null;
+    try {
+      card = document.querySelector(location.hash);
+    } catch (err) {
+      return;
+    }
+
     if (card && card.classList.contains('service-card')) {
       openServiceDetails(card);
     }
