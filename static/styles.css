@@ -10,9 +10,11 @@
   --teal-900: #255657;
   --teal-700: #439698;
   --teal-500: #599497;
+  --teal-200 : #a3d1d1;
   --teal-100: #e0f2f2;
   --paper: #ededf0;
   --ink: #183536;
+  --transition: #43969888;
 }
 
 html,
@@ -100,16 +102,18 @@ a {
   color: var(--teal-900);
   background: transparent;
   border: 0;
+  border-radius: 999px;
   cursor: pointer;
-  padding: 0.35rem 0.1rem;
+  padding: 0.4rem 0.9rem;
   position: relative;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0.9rem;
+  right: 0.9rem;
   bottom: -2px;
   height: 2px;
   background: var(--teal-700);
@@ -120,6 +124,15 @@ a {
 
 .nav-link:hover::after {
   transform: scaleX(1);
+}
+
+.nav-link.is-active {
+  background: var(--teal-700);
+  color: #fff;
+}
+
+.nav-link.is-active::after {
+  transform: scaleX(0);
 }
 
 .nav-dropdown {
@@ -369,7 +382,6 @@ a {
 }
 
 .about {
-  background: var(--paper);
   position: relative;
   overflow: hidden;
 }
@@ -379,7 +391,7 @@ a {
   inset: 0;
   left: auto;
   width: 100%;
-  z-index: 0;
+  z-index: -1;
 }
 
 .about-media img {
@@ -387,18 +399,20 @@ a {
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 40%;
+  opacity: 30%;
 }
 
-.about-media::after {
+/* .about-media::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(to left, transparent 45%, var(--bg) 100%);
-}
+
+} */
 
 .technology {
-  background: var(--teal-100);
+  /* background: var(--teal-100); */
+  background: linear-gradient(to bottom, var(--transition), transparent), var(--paper);
 }
 
 .services {
@@ -558,22 +572,57 @@ a {
 }
 
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
   width: 100%;
   margin-top: 1rem;
 }
 
+.services-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
 .service-card {
   background: #fff;
   border-radius: 1rem;
-  padding: 1.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.8rem;
   box-shadow: 0 8px 24px rgba(24, 53, 54, 0.08);
   scroll-margin-top: calc(var(--nav-height) + 1rem);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  /* gap: 1rem; */
+}
+
+.service-top {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.service-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 0.6rem;
+  min-width: 0;
+}
+
+.service-image {
+  flex-shrink: 0;
+  width: 40%;
+  max-width: 11rem;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  /* background: var(--teal-100); */
+  border-radius: 0.75rem;
+  display: block;
 }
 
 .service-number {
@@ -599,49 +648,41 @@ a {
 }
 
 .service-toggle {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  align-self: flex-start;
-  margin-top: 0.5rem;
-  padding: 0.55rem 1rem;
-  border: 1.5px solid var(--teal-700);
-  border-radius: 999px;
-  background: var(--teal-100);
+  justify-content: space-between;
+  width: calc(100% + 3rem);
+  margin: 0 -1.5rem;
+  padding: 0.85rem 1.5rem;
+  border: 0;
+  border-top: 1px solid var(--teal-100);
+  border-radius: 0;
+  background: transparent;
   cursor: pointer;
   font-family: "Quicksand", sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--teal-900);
-  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  color: var(--teal-700);
+  transition: background 160ms ease, color 160ms ease;
 }
 
-.service-toggle:hover {
-  background: var(--teal-700);
-  border-color: var(--teal-700);
-  color: #fff;
-  transform: translateY(-1px);
+.service-toggle:hover,
+.service-toggle[aria-expanded="true"] {
+  background: var(--teal-100);
+  color: var(--teal-900);
 }
 
 .service-toggle:focus-visible {
   outline: 2px solid var(--teal-700);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 .service-toggle .chevron {
   flex-shrink: 0;
-  width: 1.15rem;
-  height: 1.15rem;
-  padding: 0.32rem;
-  border-radius: 50%;
-  background: var(--teal-700);
-  color: #fff;
-  transition: transform 220ms ease, background 160ms ease;
-}
-
-.service-toggle:hover .chevron {
-  background: #fff;
-  color: var(--teal-700);
+  width: 0.75rem;
+  height: 0.75rem;
+  color: currentColor;
+  transition: transform 220ms ease;
 }
 
 .service-toggle[aria-expanded="true"] .chevron {
@@ -651,11 +692,13 @@ a {
 .service-details {
   max-height: 0;
   overflow: hidden;
+  margin: 0 -1.5rem;
   transition: max-height 280ms ease;
 }
 
 .service-details.is-open {
-  padding-top: 0.75rem;
+  padding: 0.9rem 1.5rem 1rem;
+  background: var(--teal-100);
 }
 
 .service-list {
@@ -669,7 +712,7 @@ a {
 }
 
 .people {
-  background: var(--teal-100);
+  background: linear-gradient(to bottom, var(--paper), transparent), var(--teal-100);
   overflow: visible;
 }
 
@@ -792,6 +835,23 @@ a {
   border-bottom-color: var(--bg);
 }
 
+/* When there isn't room below the card (e.g. the last row of people, or a
+   short viewport), positionPersonBio() in index.html flips the popover to
+   open upward instead. The arrow has to flip with it — top instead of
+   bottom, pointing down into the card instead of up. */
+.person-bio.bio-above {
+  top: auto;
+  bottom: calc(100% + 0.85rem);
+  transform: translateX(var(--bio-shift-x, -50%)) translateY(6px);
+}
+
+.person-bio.bio-above::before {
+  bottom: auto;
+  top: 100%;
+  border-bottom-color: transparent;
+  border-top-color: var(--bg);
+}
+
 .person-card:focus-visible .person-bio,
 .person-card.is-open .person-bio {
   opacity: 1;
@@ -801,9 +861,9 @@ a {
 }
 
 .person-bio p {
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.25;
 }
 
 .contacts-meta {
@@ -996,7 +1056,10 @@ a {
   }
 }
 
-@media (max-width: 1400px) {
+/* The ladder used to start at 1400px, which left a 1440px laptop on the full
+   15rem photos. Starts at 1500px now. These must stay in descending order —
+   they are equal specificity, so a later block always wins the overlap. */
+@media (max-width: 1500px) {
   .person-photo {
       width: 14rem;
       height: 14rem;
@@ -1048,7 +1111,7 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .services-grid {
+  .services-row {
     grid-template-columns: 1fr;
   }
 
@@ -1133,6 +1196,20 @@ a {
 
   .nav-dropdown-menu a {
     color: var(--teal-900);
+  }
+}
+
+/* SHORT-VIEWPORT (LAPTOP) SIZE LEVER.
+   This layout is one section per screen, so the binding constraint on a laptop
+   is viewport HEIGHT, not width. A 2880x1620 panel at 200% OS scaling reports
+   1440 x ~710 CSS px: wide enough to clear every width breakpoint above, but
+   ~100px too short to fit Services or the People row plus its bio popover.
+   Same proportional trick as the mobile lever below — one number to tune.
+   At ~710px tall this resolves to ~13px (a full-height desktop stays at 16px).
+   Must stay ABOVE the max-width: 768px block so phones still win on that rule. */
+@media (max-height: 900px) {
+  html {
+    font-size: clamp(11px, 1.85vh, 16px);
   }
 }
 

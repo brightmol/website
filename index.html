@@ -48,7 +48,7 @@
             <li><a href="#service-toxicity">Early Preliminary Toxicity Assays</a></li>
           </ul>
         </li>
-        <li><a href="#people" class="nav-link">People</a></li>
+        <li><a href="#people" class="nav-link" style="display : block;">People</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
@@ -102,7 +102,7 @@
           design and biological validation through our proprietary LIPS technology, enabling
           real-time monitoring of target proteins inside living cells.
         </p>
-        <p class="section-body">
+        <p class="section-lede">
           By providing faster, more informative, and cost-effective cell-based assays, we help
           pharmaceutical and biotechnology companies identify promising drug candidates earlier,
           reduce development risk, and make better R&amp;D decisions. Our long-term vision is to
@@ -194,10 +194,15 @@
         </p>
 
         <div class="services-grid">
+          <div class="services-row">
           <article id="service-hit-id" class="service-card">
-            <span class="service-number">01</span>
-            <h3>Hit Identification &amp; Target Screening</h3>
-            <p class="service-tagline">Accelerated discovery and identification of novel bioactive molecules</p>
+            <div class="service-top">
+              <div class="service-text">
+                <h3>Hit Identification &amp; Target Screening</h3>
+                <p class="service-tagline">Accelerated discovery and identification of novel bioactive molecules</p>
+              </div>
+              <img class="service-image" src="static/PRJ1.png" alt="Automated multi-well plate screening illustration" loading="lazy">
+            </div>
             <button class="service-toggle" aria-expanded="false">
               <span>View project details</span>
               <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
@@ -214,9 +219,13 @@
           </article>
 
           <article id="service-validation" class="service-card">
-            <span class="service-number">02</span>
-            <h3>Drug Candidate Validation &amp; Custom Assays</h3>
-            <p class="service-tagline">Functional validation and high-fidelity biological contextualization of your leads</p>
+            <div class="service-top">
+              <div class="service-text">
+                <h3>Drug Candidate Validation &amp; Custom Assays</h3>
+                <p class="service-tagline">Functional validation and high-fidelity biological contextualization of your leads</p>
+              </div>
+              <img class="service-image" src="static/PRJ2.png" alt="Close-up of a cell and its target protein illustration" loading="lazy">
+            </div>
             <button class="service-toggle" aria-expanded="false">
               <span>View project details</span>
               <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
@@ -231,11 +240,17 @@
               </ul>
             </div>
           </article>
+          </div>
 
+          <div class="services-row">
           <article id="service-moa" class="service-card">
-            <span class="service-number">03</span>
-            <h3>MoA Studies &amp; Hit-to-Lead Optimization</h3>
-            <p class="service-tagline">Deep pharmacodynamic insights and molecular refinement</p>
+            <div class="service-top">
+              <div class="service-text">
+                <h3>MoA Studies &amp; Hit-to-Lead Optimization</h3>
+                <p class="service-tagline">Deep pharmacodynamic insights and molecular refinement</p>
+              </div>
+              <img class="service-image" src="static/PRJ3.png" alt="Assay plates with a dose-response curve and validation shield illustration" loading="lazy">
+            </div>
             <button class="service-toggle" aria-expanded="false">
               <span>View project details</span>
               <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
@@ -251,9 +266,13 @@
           </article>
 
           <article id="service-toxicity" class="service-card">
-            <span class="service-number">04</span>
-            <h3>Early Preliminary Toxicity Assays</h3>
-            <p class="service-tagline">Timely pipeline de-risking to prevent late-stage developmental failures</p>
+            <div class="service-top">
+              <div class="service-text">
+                <h3>Early Preliminary Toxicity Assays</h3>
+                <p class="service-tagline">Timely pipeline de-risking to prevent late-stage developmental failures</p>
+              </div>
+              <img class="service-image" src="static/PRJ4.png" alt="DNA strand with gene-editing scissors illustration" loading="lazy">
+            </div>
             <button class="service-toggle" aria-expanded="false">
               <span>View project details</span>
               <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
@@ -268,12 +287,17 @@
               </ul>
             </div>
           </article>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="people" class="slide people">
-      <div class="section-content">
+      <div class="people-medias"></div>
+      <!-- <div class="people-media">
+        <img src="static/IMG2.png" alt="" />
+      </div> -->
+      <div class="section-content" style="padding-bottom: 2rem;">
         <p class="section-eyebrow">Our People</p>
         <h2 class="section-title">Meet the team behind BrightMol</h2>
         <div class="people-grid">
@@ -493,17 +517,42 @@
     details.style.maxHeight = null;
   }
 
+  const allServiceCards = document.querySelectorAll('.service-card');
+
   document.querySelectorAll('.service-toggle').forEach(toggle => {
     toggle.addEventListener('click', () => {
       const card = toggle.closest('.service-card');
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      isOpen ? closeServiceDetails(card) : openServiceDetails(card);
+      if (isOpen) {
+        closeServiceDetails(card);
+        return;
+      }
+      allServiceCards.forEach(otherCard => {
+        if (otherCard !== card) closeServiceDetails(otherCard);
+      });
+      openServiceDetails(card);
     });
   });
 
   function openServiceFromHash() {
-    const card = document.querySelector(location.hash);
+    // On a plain load with no #fragment, location.hash is '' — and
+    // querySelector('') throws a SyntaxError, which killed every line of script
+    // below this point (including all the person-card handlers). Bail out first.
+    if (!location.hash || location.hash === '#') return;
+
+    // A hash is arbitrary user-controlled text and is not guaranteed to be a
+    // valid CSS selector, so this can still throw on e.g. '#foo bar' or '#1x'.
+    let card = null;
+    try {
+      card = document.querySelector(location.hash);
+    } catch (err) {
+      return;
+    }
+
     if (card && card.classList.contains('service-card')) {
+      allServiceCards.forEach(otherCard => {
+        if (otherCard !== card) closeServiceDetails(otherCard);
+      });
       openServiceDetails(card);
     }
   }
@@ -511,12 +560,45 @@
   window.addEventListener('hashchange', openServiceFromHash);
   openServiceFromHash();
 
+  const slidesContainer = document.querySelector('.slides');
+  const navSections = document.querySelectorAll('.slide[id]');
+  const sectionNavLinks = new Map();
+
+  navPanel.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+    sectionNavLinks.set(link.getAttribute('href').slice(1), link);
+  });
+  sectionNavLinks.set('services', servicesToggle);
+
+  function setActiveSection(id) {
+    sectionNavLinks.forEach(link => link.classList.remove('is-active'));
+    const activeLink = sectionNavLinks.get(id);
+    if (activeLink) activeLink.classList.add('is-active');
+  }
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    },
+    {
+      root: slidesContainer,
+      rootMargin: '-45% 0px -45% 0px',
+      threshold: 0
+    }
+  );
+
+  navSections.forEach(section => sectionObserver.observe(section));
+
   function positionPersonBio(card) {
     const bio = card.querySelector('.person-bio');
     if (!bio) return;
     const margin = 16;
     const cardRect = card.getBoundingClientRect();
-    const bioWidth = bio.getBoundingClientRect().width;
+    const bioRect = bio.getBoundingClientRect();
+    const bioWidth = bioRect.width;
     const cardCenterX = cardRect.left + cardRect.width / 2;
 
     let bioLeftPage = cardCenterX - bioWidth / 2;
@@ -530,6 +612,14 @@
     let arrowLeft = cardCenterX - bioLeftPage;
     arrowLeft = Math.min(Math.max(arrowLeft, 14), bioWidth - 14);
     card.style.setProperty('--arrow-left', `${arrowLeft}px`);
+
+    // Same edge-avoidance as the left/right clamp above, but for the bottom:
+    // if the popover doesn't fit below the card within the viewport, flip it
+    // to open upward instead of letting it get clipped off-screen.
+    const gapPx = 0.85 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const spaceBelow = window.innerHeight - cardRect.bottom - gapPx;
+    const fitsBelow = spaceBelow >= bioRect.height + margin;
+    bio.classList.toggle('bio-above', !fitsBelow);
   }
 
   document.querySelectorAll('.person-card').forEach(card => {
