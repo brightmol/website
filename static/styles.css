@@ -14,7 +14,8 @@
   --teal-100: #e0f2f2;
   --paper: #ededf0;
   --ink: #183536;
-  --transition: #43969888;
+  --transition: #439698f0;
+  --transition2: #449c9ef0;
 }
 
 html,
@@ -384,6 +385,7 @@ a {
 .about {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(to bottom, transparent calc(100% - 18vh), var(--transition2)), #fff0;
 }
 
 .about-media {
@@ -835,10 +837,6 @@ a {
   border-bottom-color: var(--bg);
 }
 
-/* When there isn't room below the card (e.g. the last row of people, or a
-   short viewport), positionPersonBio() in index.html flips the popover to
-   open upward instead. The arrow has to flip with it — top instead of
-   bottom, pointing down into the card instead of up. */
 .person-bio.bio-above {
   top: auto;
   bottom: calc(100% + 0.85rem);
@@ -878,6 +876,21 @@ a {
   padding-bottom: 5rem;
 }
 
+.contacts .section-content {
+  position: relative;
+  z-index: 1;
+}
+.contacts::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 32vh;
+  background: linear-gradient(to bottom, var(--teal-100), transparent);
+  opacity: var(--seam-wash-opacity, 0);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .section-content {
   width: min(100%, 90rem);
   min-height: 100%;
@@ -888,7 +901,13 @@ a {
 }
 
 .contacts .section-content {
-  min-height: calc(100vh - var(--nav-height));
+  /* The base rule's min-height: 100% resolves against the slide's border
+     box (padding included), not its content box, so it was still forcing
+     this element — and with it the whole slide — taller than one screen by
+     exactly the slide's own top+bottom padding. align-items: stretch on
+     .contacts already sizes this correctly on its own; it doesn't need a
+     percentage height too. */
+  min-height: 0;
   justify-content: space-between;
 }
 
@@ -1056,9 +1075,6 @@ a {
   }
 }
 
-/* The ladder used to start at 1400px, which left a 1440px laptop on the full
-   15rem photos. Starts at 1500px now. These must stay in descending order —
-   they are equal specificity, so a later block always wins the overlap. */
 @media (max-width: 1500px) {
   .person-photo {
       width: 14rem;
@@ -1198,15 +1214,6 @@ a {
     color: var(--teal-900);
   }
 }
-
-/* SHORT-VIEWPORT (LAPTOP) SIZE LEVER.
-   This layout is one section per screen, so the binding constraint on a laptop
-   is viewport HEIGHT, not width. A 2880x1620 panel at 200% OS scaling reports
-   1440 x ~710 CSS px: wide enough to clear every width breakpoint above, but
-   ~100px too short to fit Services or the People row plus its bio popover.
-   Same proportional trick as the mobile lever below — one number to tune.
-   At ~710px tall this resolves to ~13px (a full-height desktop stays at 16px).
-   Must stay ABOVE the max-width: 768px block so phones still win on that rule. */
 @media (max-height: 900px) {
   html {
     font-size: clamp(11px, 1.85vh, 16px);
@@ -1214,11 +1221,6 @@ a {
 }
 
 @media (max-width: 768px) {
-  /* MASTER MOBILE SIZE LEVER.
-     Almost every size in this file is in rem, so shrinking the root font-size
-     scales all type, padding, gaps, cards and tables proportionally.
-     Lower the numbers to shrink everything further, raise them to grow it.
-     At a 393px-wide phone this resolves to ~12.6px (desktop default is 16px). */
   html {
     font-size: clamp(11px, 3.2vw, 14px);
   }
@@ -1226,9 +1228,6 @@ a {
   :root {
     --nav-height: 76px;
   }
-
-  /* These two are set in desktop-scale rem (4.5rem / 3rem), so proportional
-     scaling alone still leaves them oversized on a phone. */
   .hero-title {
     font-size: clamp(2rem, 8.5vw, 3rem);
   }
@@ -1264,11 +1263,5 @@ a {
 
   .footer-piva {
     font-size: 0.72rem;
-  }
-}
-
-@supports (height: 100dvh) {
-  .contacts .section-content {
-    min-height: calc(100dvh - var(--nav-height));
   }
 }

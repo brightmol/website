@@ -363,7 +363,7 @@
           </article>
           <article class="person-card" tabindex="0">
             <div class="person-photo">
-              <img src="static/emiliano-biasini.png" alt="Emiliano Biasini" />
+              <img src="static/emiliano-biasini.jpg" alt="Emiliano Biasini" />
             </div>
             <h3 class="person-name">Emiliano Biasini, PhD</h3>
             <p class="person-title">Co-founder, Chair of Scientific Board</p>
@@ -591,6 +591,20 @@
   );
 
   navSections.forEach(section => sectionObserver.observe(section));
+
+  const contactSeam = document.getElementById('contact');
+  const seamFadeDistance = () => window.innerHeight * 0.22;
+
+  function updateSeamWash() {
+    const top = contactSeam.getBoundingClientRect().top;
+    const progress = Math.min(Math.max(top / seamFadeDistance(), 0), 1);
+    contactSeam.style.setProperty('--seam-wash-opacity', progress.toFixed(3));
+  }
+
+  slidesContainer.addEventListener('scroll', () => {
+    requestAnimationFrame(updateSeamWash);
+  }, { passive: true });
+  updateSeamWash();
 
   function positionPersonBio(card) {
     const bio = card.querySelector('.person-bio');
