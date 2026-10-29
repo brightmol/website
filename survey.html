@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrightMol Biotech - Market Survey</title>
+  <meta name="description" content="Help BrightMol Biotech understand how your team validates compounds in cells. A 5-minute, confidential questionnaire." />
+  <link rel="icon" href="static/Logo1c.svg" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/styles.css" />
+  <script>
+    // Applied before first paint so a saved dark theme doesn't flash light.
+    try {
+      if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+    } catch (err) {}
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YV5EHG62K3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YV5EHG62K3');
+  </script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="index.html#home" class="brand">
+      <img src="static/Logo1c.svg" alt="BrightMol" class="brand-logo" />
+      <span class="brand-name">BrightMol</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navPanel">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-panel" id="navPanel">
+      <ul class="nav-links">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#technology" class="nav-link">Technology</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link nav-dropdown-toggle" id="servicesToggle" aria-expanded="false" aria-controls="servicesMenu">
+            Services
+            <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="nav-dropdown-menu" id="servicesMenu">
+            <li><a href="index.html#service-hit-id">Hit Identification &amp; Target Screening</a></li>
+            <li><a href="index.html#service-validation">Drug Candidate Validation &amp; Custom Assays</a></li>
+            <li><a href="index.html#service-moa">MoA Studies &amp; Hit-to-Lead Optimization</a></li>
+            <li><a href="index.html#service-toxicity">Early Preliminary Toxicity Assays</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#people" class="nav-link">People</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="contact-icons" id="contact-icons">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Dark theme" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+      <a href="mailto:info@brightmol.com">
+        <img src="static/mailG.svg" alt="mail" class="contact-icon" />
+      </a>
+      <a href="https://www.linkedin.com/company/brightmol-biotech/">
+        <img src="static/In-logo.png" alt="LinkedIn" class="contact-icon" />
+      </a>
+    </div>
+  </nav>
+
+  <main class="survey-main" id="surveyMain">
+    <header class="survey-hero">
+      <div class="survey-hero-inner">
+        <p class="section-eyebrow">Market Survey</p>
+        <h1 class="survey-title">Help us shape faster compound validation</h1>
+        <p class="survey-lede">
+          BrightMol Biotech is building a faster way to test and validate compounds in living cells.
+          Are you working on new drugs or protein degraders? Help us understand your needs with this
+          short questionnaire. Your input will shape solutions for real industry challenges.
+        </p>
+      </div>
+    </header>
+
+    <div class="survey-card" id="surveyCard">
+      <div class="survey-progress">
+        <div class="survey-progress-text">
+          <h2 class="survey-progress-title" id="progressLabel"></h2>
+          <span class="survey-progress-count" id="progressCount"></span>
+        </div>
+        <div class="survey-progress-track" aria-hidden="true"><div class="survey-progress-bar" id="progressBar"></div></div>
+      </div>
+
+      <form id="surveyForm" novalidate>
+        <div id="surveySteps"></div>
+
+        <p class="survey-submit-error" id="submitError" role="alert" hidden>
+          Something went wrong sending your answers. Please check your connection and try again, or
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmv4hdswYnz3oEXspwL9WZ4OxPHvyC2_ux8XiPd-hBv3hPVw/viewform" target="_blank" rel="noopener">fill in the survey on Google Forms</a>.
+        </p>
+
+        <div class="survey-actions">
+          <button type="button" class="btn btn-outline" id="backBtn">Back</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+        </div>
+      </form>
+
+      <div class="survey-thanks" id="surveyThanks" hidden tabindex="-1">
+        <p class="section-eyebrow">Response received</p>
+        <h2 class="survey-step-title">Thank you so much for your time!</h2>
+        <p>Your input is incredibly valuable to us.</p>
+        <p>
+          Should you need to reach out to our team, write to
+          <a href="mailto:info@brightmol.com">info@brightmol.com</a> or contact our CEO directly at
+          <a href="mailto:ilaria.zeni@brightmol.com">ilaria.zeni@brightmol.com</a>.
+        </p>
+        <a href="index.html" class="btn btn-primary">Back to the website</a>
+      </div>
+    </div>
+  </main>
+</body>
+<script>
+  const themeToggle = document.getElementById('themeToggle');
+
+  function syncThemeToggle() {
+    themeToggle.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.dataset.theme !== 'dark';
+    if (isDark) document.documentElement.dataset.theme = 'dark';
+    else delete document.documentElement.dataset.theme;
+    try {
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    } catch (err) {}
+    syncThemeToggle();
+  });
+
+  syncThemeToggle();
+
+  const navToggle = document.getElementById('navToggle');
+  const navPanel = document.getElementById('navPanel');
+  const servicesToggle = document.getElementById('servicesToggle');
+  const servicesDropdown = servicesToggle.closest('.nav-dropdown');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navPanel.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  servicesToggle.addEventListener('click', () => {
+    const isOpen = servicesDropdown.classList.toggle('is-open');
+    servicesToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!servicesDropdown.contains(event.target)) {
+      servicesDropdown.classList.remove('is-open');
+      servicesToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Answers are posted straight to the Google Form, so responses keep landing
+  // in the same Google Sheet / Forms dashboard as before.
+  const FORM_RESPONSE_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdmv4hdswYnz3oEXspwL9WZ4OxPHvyC2_ux8XiPd-hBv3hPVw/formResponse';
+  const GOOGLE_PAGE_HISTORY = '0,1,2,3,4,5,6,7';
+  const OTHER = '__other_option__';
+
+  const STEPS = [
+    { title: 'Before we start' },
+    {
+      title: 'Let’s start with you',
+      description: '<p>Just a few quick questions about you and your work.</p>'
+    },
+    {
+      title: 'Current practice: in-house vs. outsourced',
+      description: '<p>Regarding <strong>first biological validation</strong>: the first assessment of compound activity in cells (e.g., target engagement, protein level modulation, cell-based potency).</p>'
+    },
+    { title: 'Throughput and frequency' },
+    { title: 'Cost' },
+    { title: 'Time and bottlenecks' },
+    {
+      title: 'Interest in an external startup service',
+      description:
+        '<p>Please consider an external provider offering real-time validation of compound activity in live cells. ' +
+        'Instead of a single endpoint measurement, the activity of the compound is monitored continuously over time in living cells.</p>' +
+        '<p>Compared to standard approaches such as endpoint assays (e.g., Western blot, ELISA), reporter assays or fixed-cell imaging, this service would offer:</p>' +
+        '<ul><li>Faster turnaround time</li><li>Greater reliability and reproducibility of results</li>' +
+        '<li>More predictable outcomes, with richer information per compound (e.g., kinetics and dose-response)</li></ul>' +
+        '<p>Please answer the following questions as realistically as possible.</p>'
+    },
+    { title: 'Closing' }
+  ];
+
+  // Generated from the Google Form. Option strings must match the form exactly
+  // (en dashes, curly apostrophes), or Google files them under "Other".
+  const QUESTIONS = [
+    {step: 0, entry: 216120308, type: "text", title: "Which organisation/company are you working with?", help: "It helps us understand our audience, but it’s entirely up to you. Your answers will only be reported in aggregate."},
+    {step: 1, entry: 459107659, type: "radio", title: "A1. What is your role?", required: true, options: ["Medicinal / computational chemist", "Biologist / pharmacologist", "Head of Discovery / R&D", "Procurement / Outsourcing / Alliance management"], other: true},
+    {step: 1, entry: 702489300, type: "radio", title: "A2. What is the size of your organization?", required: true, options: ["Big pharma (>10,000 employees)", "Mid-size pharma / biotech (500–10,000 employees)", "Small biotech (<500 employees)", "Academic/University Lab", "Startup"], other: true},
+    {step: 1, entry: 1934013731, type: "checkbox", title: "A3. Which approaches do you use to identify or design drug candidates?", help: "(select all that apply)", required: true, options: ["In silico / computational screening or design (e.g., virtual screening, AI/ML-based design)", "Experimental high-throughput screening (HTS)", "Fragment-based or structure-based design", "Medicinal chemistry optimization of known compounds", "We do not develop compounds (e.g., we only in-license or acquire them)"], other: true},
+    {step: 1, entry: 1359325280, type: "checkbox", title: "A4. What type of drugs do you develop?", help: "(select all that apply)", options: ["Small molecules", "Targeted protein degraders (PROTACs, molecular glues)", "Peptides", "Antibodies / biologics", "We do not develop drugs", "mRNA based"], other: true},
+    {step: 2, entry: 1636443901, type: "radio", title: "B1. How do you validate the activity of your compounds?", help: "Please refer to the first biological validation in a cellular context (e.g., target engagement, protein level modulation, cell-based potency).", required: true, options: ["Entirely in-house (skip to B4)", "Mostly in-house, partly outsourced", "Mostly outsourced, partly in-house", "Entirely outsourced"]},
+    {step: 2, entry: 676605923, type: "checkbox", title: "B2. If outsourced, to whom?", help: "(select all that apply)", required: true, options: ["Large CROs", "Small / specialized CROs", "Academic labs / core facilities", "Biotech / tech startups", "Partner companies (collaborations)"], other: true},
+    {step: 2, entry: 1309327517, type: "checkbox", title: "B3. What are the main reasons for outsourcing?", help: "(select at most 3 options)", required: true, options: ["Lack of internal capacity", "Lack of specific expertise or technology", "Lower cost", "Speed", "Flexibility (variable workload)"], other: true, max: 3},
+    {step: 2, entry: 883286551, type: "checkbox", title: "B4. What are the main reasons for keeping validation in-house?", help: "(select at most 3 options)", required: true, options: ["IP / data confidentiality", "Control over quality and assay design", "Cost", "Speed", "Existing infrastructure"], other: true, max: 3},
+    {step: 2, entry: 1079179808, type: "checkbox", title: "B5. Which types of cell-based assays do you currently use for first validation?", help: "(select all that apply)", required: true, options: ["Endpoint assays (e.g., Western blot, ELISA, viability)", "High-content imaging", "Reporter assays", "Live-cell, real-time protein monitoring"], other: true},
+    {step: 3, entry: 1232301886, type: "radio", title: "C1. On average, how many cell-based assays does your team run per week to validate compounds?", required: true, options: ["< 10", "10–50", "50–200", "200–1,000", "> 1,000", "Not sure / varies a lot"]},
+    {step: 3, entry: 1927492314, type: "radio", title: "C2. How many different cell lines or models do you typically use per compound?", required: true, options: ["1", "2–3", "4–10", "> 10"]},
+    {step: 3, entry: 1419093941, type: "radio", title: "C3. How would you describe your demand for compound validation over time?", required: true, options: ["Constant: we test compounds at a similar pace all year", "Regular peaks: we test large batches after each synthesis or screening campaign", "Irregular: it depends on the project and varies a lot", "Occasional: we only need it a few times a year"], other: true},
+    {step: 4, entry: 1357591971, type: "radio", title: "D1. If applicable, roughly how much does it cost your company to validate one compound in cells internally?", required: true, options: ["< $ 100", "$100–500", "$500–2,000", "$2,000–10,000", "> $10,000", "Don't know", "Not applicable (we don’t validate compounds internally)"]},
+    {step: 4, entry: 1812022687, type: "radio", title: "D2. If applicable, roughly how much do you pay an external provider to validate one compound in cells?", required: true, options: ["< $100", "$100–500", "$500–2,000", "$2,000–10,000", "> $10,000", "Don't know", "Not applicable (we do not outsource)"]},
+    {step: 4, entry: 937452785, type: "radio", title: "D3. How do you usually pay external providers?", required: true, options: ["Per compound", "Per assay", "Per project", "FTE-based contract", "Not applicable"], other: true},
+    {step: 4, entry: 711676644, type: "radio", title: "D4. Do you know your full internal cost (including overhead) or only the direct cost?", required: true, options: ["Full cost (including overhead)", "Direct cost only", "Don't know"]},
+    {step: 5, entry: 754035568, type: "radio", title: "E1. How long does it typically take from the moment a compound is predicted or hypothesized to be active (e.g., by AI/in silico methods or other approaches) to the first evaluable results in cells?", required: true, options: ["< 1 week", "1–2 weeks", "2–4 weeks", "1–3 months", "> 3 months", "> 6 months"], other: true},
+    {step: 5, entry: 1922799367, type: "scale", title: "E2. Is first cellular validation a bottleneck in your discovery pipeline?", required: true, options: ["1", "2", "3", "4", "5"], labels: ["Not at all", "Critical bottleneck"]},
+    {step: 5, entry: 1443832423, type: "textarea", title: "E3. What are your biggest pain points in cell-based validation?"},
+    {step: 5, entry: 1127990841, type: "radio", title: "E4. Of all the compounds you test in cells, roughly what percentage show the expected activity?", help: "A rough estimate is fine. Please consider all compounds tested in cell-based assays, whether in-house or by an external provider", required: true, options: ["< 1%", "< 5%", "< 10%", "10–30%", "30–60%", "> 60%", "Don't know"]},
+    {step: 6, entry: 1293433188, type: "scale", title: "F1. How interested would you be in such a service?", required: true, options: ["1", "2", "3", "4", "5"], labels: ["Not at all interested", "Very interested"]},
+    {step: 6, entry: 2012187244, type: "radio", title: "F2. What is the MAXIMUM price per compound you would be willing to pay for such a service?", help: "Please be honest. Assume the service provides, for each compound, a complete cellular activity profile: EC50, LD50 (cytotoxicity) and other relevant information on the compound’s activity.", required: true, options: ["< $1,000", "$5,000 - 10,000", "$10,000-25,000", "$25,000-50,000", "> $100,000"]},
+    {step: 6, entry: 576520834, type: "radio", title: "F3. Which commercial model would you prefer?", required: true, options: ["Per-compound pricing", "Subscription / annual contract", "Project-based or milestone-based", "Co-development partnership"], other: true},
+    {step: 6, entry: 1649182918, type: "checkbox", title: "F4. What is the minimum evidence you would need before trusting a new provider?", help: "(select all that apply)", options: ["Head-to-head comparison with your current method", "Pilot / free test on a few compounds", "Peer-reviewed publication", "References from other pharma companies", "Quality certifications (e.g., GLP, ISO)"], other: true},
+    {step: 6, entry: 1765344291, type: "checkbox", title: "F5. What would be the main barriers to adopting a startup provider?", help: "(select all that apply)", options: ["IP / confidentiality concerns", "Internal approval / vendor qualification", "Startup stability / long-term reliability", "Data format / integration", "Price"], other: true},
+    {step: 6, entry: 1579787363, type: "radio", title: "F6. What turnaround time would make you consider using an external provider (or switching to a new one) for validating compounds in cells?", help: "Please count from the moment a compound is ready to be tested until you receive the first evaluable results in cells.", required: true, options: ["Less than 1 week", "1-2 weeks", "2-4 weeks", "1-3 months", "No specific threshold: it depends on the project", "Not sure, we haven’t evaluated this"]},
+    {step: 7, entry: 837474467, type: "radio", title: "G1. Would you be open to a 20-minute follow-up interview?", required: true, options: ["Yes", "No"]},
+    {step: 7, entry: 1720094766, type: "text", title: "G2. If yes, please leave your email address:", email: true},
+    {step: 7, entry: 1467093429, type: "textarea", title: "G3. Any other comment?"}
+  ];
+
+  const B1 = 1636443901;
+  const IN_HOUSE = 'Entirely in-house (skip to B4)';
+  const OUTSOURCED = 'Entirely outsourced';
+
+  // Questions that only apply for certain answers. Hidden questions are disabled,
+  // so they are not validated; they are submitted with the `prefill` value for the
+  // triggering answer if there is one, otherwise left blank. A step whose questions
+  // are all hidden is skipped, which is how the Cost section is skipped for
+  // entirely in-house validation.
+  const CONDITIONS = {
+    676605923: { entry: B1, hideIf: [IN_HOUSE] },   // B2 outsourced to whom
+    1309327517: { entry: B1, hideIf: [IN_HOUSE] },  // B3 reasons for outsourcing
+    883286551: { entry: B1, hideIf: [OUTSOURCED] }, // B4 reasons for keeping in-house
+    1357591971: { entry: B1, hideIf: [IN_HOUSE, OUTSOURCED], prefill: { [OUTSOURCED]: 'Not applicable (we don’t validate compounds internally)' } }, // D1
+    1812022687: { entry: B1, hideIf: [IN_HOUSE], prefill: { [IN_HOUSE]: 'Not applicable (we do not outsource)' } }, // D2
+    937452785: { entry: B1, hideIf: [IN_HOUSE], prefill: { [IN_HOUSE]: 'Not applicable' } }, // D3
+    711676644: { entry: B1, hideIf: [IN_HOUSE, OUTSOURCED] }, // D4 internal cost
+    1720094766: { entry: 837474467, showIf: ['Yes'] }  // G2 email
+  };
+
+  // Checkbox options that rule out every other option in the same question.
+  const EXCLUSIVE = {
+    1934013731: 'We do not develop compounds (e.g., we only in-license or acquire them)', // A3
+    1359325280: 'We do not develop drugs' // A4
+  };
+
+  const form = document.getElementById('surveyForm');
+  const stepsEl = document.getElementById('surveySteps');
+  const backBtn = document.getElementById('backBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitError = document.getElementById('submitError');
+  const surveyMain = document.getElementById('surveyMain');
+  const surveyCard = document.getElementById('surveyCard');
+  let currentStep = 0;
+
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+  }
+
+  function renderChoice(q, value, label) {
+    const id = `q${q.entry}-${q.optionCount++}`;
+    const option = el('label', 'survey-option');
+    option.htmlFor = id;
+    const input = el('input');
+    input.type = q.type === 'checkbox' ? 'checkbox' : 'radio';
+    input.name = `entry.${q.entry}`;
+    input.id = id;
+    input.value = value;
+    option.append(input, el('span', 'survey-option-label', label));
+    return option;
+  }
+
+  function renderQuestion(q) {
+    const isChoice = ['radio', 'checkbox', 'scale'].includes(q.type);
+    const wrapper = el(isChoice ? 'fieldset' : 'div', 'survey-question');
+    wrapper.dataset.entry = q.entry;
+
+    const title = el(isChoice ? 'legend' : 'label', 'survey-question-title', q.title);
+    if (!isChoice) title.htmlFor = `q${q.entry}`;
+    if (q.required) title.append(el('span', 'survey-required', ' *'));
+    wrapper.append(title);
+    if (q.help) wrapper.append(el('p', 'survey-question-help', q.help));
+
+    q.optionCount = 0;
+    if (q.type === 'scale') {
+      const scale = el('div', 'survey-scale');
+      const row = el('div', 'survey-scale-options');
+      q.options.forEach(opt => row.append(renderChoice(q, opt, opt)));
+      const ends = el('div', 'survey-scale-labels');
+      ends.append(el('span', '', q.labels[0]), el('span', '', q.labels[1]));
+      scale.append(row, ends);
+      wrapper.append(scale);
+    } else if (isChoice) {
+      const list = el('div', 'survey-options');
+      q.options.forEach(opt => list.append(renderChoice(q, opt, opt)));
+      if (q.other) {
+        const other = renderChoice(q, OTHER, 'Other:');
+        other.classList.add('survey-option-other');
+        const otherText = el('input', 'survey-other-input');
+        otherText.type = 'text';
+        otherText.name = `entry.${q.entry}.other_option_response`;
+        otherText.setAttribute('aria-label', `${q.title} (other)`);
+        otherText.addEventListener('input', () => {
+          const otherInput = other.querySelector('input');
+          if (otherText.value.trim() && !otherInput.checked) {
+            otherInput.checked = true;
+            enforceExclusive(otherInput);
+          }
+          applyConditions();
+        });
+        other.append(otherText);
+        list.append(other);
+      }
+      wrapper.append(list);
+    } else {
+      const input = el(q.type === 'textarea' ? 'textarea' : 'input', 'survey-text-input');
+      if (q.type === 'textarea') input.rows = 4;
+      else input.type = q.email ? 'email' : 'text';
+      if (q.email) input.autocomplete = 'email';
+      input.id = `q${q.entry}`;
+      input.name = `entry.${q.entry}`;
+      wrapper.append(input);
+    }
+
+    wrapper.append(el('p', 'survey-error'));
+    return wrapper;
+  }
+
+  function renderSteps() {
+    STEPS.forEach((step, index) => {
+      const section = el('section', 'survey-step');
+      section.dataset.step = index;
+      section.hidden = true;
+      if (step.description) {
+        const description = el('div', 'survey-step-description');
+        description.innerHTML = step.description;
+        section.append(description);
+      }
+      QUESTIONS.filter(q => q.step === index).forEach(q => section.append(renderQuestion(q)));
+      stepsEl.append(section);
+    });
+  }
+
+  function checkedValues(entry) {
+    return [...form.querySelectorAll(`input[name="entry.${entry}"]:checked`)].map(input => input.value);
+  }
+
+  function applyConditions() {
+    Object.entries(CONDITIONS).forEach(([entry, rule]) => {
+      const answer = checkedValues(rule.entry)[0];
+      const visible = rule.showIf ? rule.showIf.includes(answer) : !rule.hideIf.includes(answer);
+      const wrapper = form.querySelector(`.survey-question[data-entry="${entry}"]`);
+      wrapper.hidden = !visible;
+      wrapper.querySelectorAll('input, textarea').forEach(input => { input.disabled = !visible; });
+    });
+  }
+
+  function enforceExclusive(input) {
+    const entry = input.name.replace('entry.', '');
+    const exclusive = EXCLUSIVE[entry];
+    if (!exclusive || input.type !== 'checkbox' || !input.checked) return;
+    form.querySelectorAll(`input[name="entry.${entry}"]:checked`).forEach(other => {
+      if (other !== input && (input.value === exclusive || other.value === exclusive)) other.checked = false;
+    });
+  }
+
+  function questionError(q, wrapper) {
+    if (q.type === 'text' || q.type === 'textarea') {
+      const value = wrapper.querySelector('.survey-text-input').value.trim();
+      if (q.required && !value) return 'This question is required.';
+      if (q.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Please enter a valid email address.';
+      return '';
+    }
+    const values = checkedValues(q.entry);
+    if (q.required && values.length === 0) return 'This question is required.';
+    if (q.max && values.length > q.max) return `Please select at most ${q.max} options.`;
+    if (values.includes(OTHER) && !wrapper.querySelector('.survey-other-input').value.trim()) {
+      return 'Please specify your “Other” answer.';
+    }
+    return '';
+  }
+
+  function validateStep(index) {
+    let firstInvalid = null;
+    QUESTIONS.filter(q => q.step === index).forEach(q => {
+      const wrapper = form.querySelector(`.survey-question[data-entry="${q.entry}"]`);
+      const message = wrapper.hidden ? '' : questionError(q, wrapper);
+      wrapper.classList.toggle('has-error', Boolean(message));
+      wrapper.querySelector('.survey-error').textContent = message;
+      if (message && !firstInvalid) firstInvalid = wrapper;
+    });
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const focusTarget = firstInvalid.querySelector('input, textarea');
+      if (focusTarget) focusTarget.focus({ preventScroll: true });
+    }
+    return !firstInvalid;
+  }
+
+  function visibleSteps() {
+    return STEPS.map((_, index) => index).filter(index =>
+      [...stepsEl.querySelectorAll(`.survey-step[data-step="${index}"] .survey-question`)].some(wrapper => !wrapper.hidden)
+    );
+  }
+
+  function showStep(index) {
+    currentStep = index;
+    stepsEl.querySelectorAll('.survey-step').forEach(section => {
+      section.hidden = Number(section.dataset.step) !== index;
+    });
+    const steps = visibleSteps();
+    const position = steps.indexOf(index);
+    const isLast = position === steps.length - 1;
+    backBtn.hidden = position === 0;
+    nextBtn.hidden = isLast;
+    submitBtn.hidden = !isLast;
+    submitError.hidden = true;
+
+    document.getElementById('progressLabel').textContent = STEPS[index].title;
+    document.getElementById('progressCount').textContent = `Step ${position + 1} of ${steps.length}`;
+    document.getElementById('progressBar').style.width = `${((position + 1) / steps.length) * 100}%`;
+  }
+
+  function stepFrom(offset) {
+    const steps = visibleSteps();
+    return steps[steps.indexOf(currentStep) + offset];
+  }
+
+  function goToStep(index) {
+    showStep(index);
+    surveyMain.scrollTo({ top: surveyCard.offsetTop - 16, behavior: 'smooth' });
+  }
+
+  function buildPayload() {
+    const data = new FormData(form);
+    const payload = new URLSearchParams();
+    data.forEach((value, key) => {
+      if (typeof value !== 'string' || !value.trim()) return;
+      const otherMatch = key.match(/^(entry\.\d+)\.other_option_response$/);
+      if (otherMatch && !data.getAll(otherMatch[1]).includes(OTHER)) return;
+      payload.append(key, value.trim());
+    });
+    Object.entries(CONDITIONS).forEach(([entry, rule]) => {
+      const wrapper = form.querySelector(`.survey-question[data-entry="${entry}"]`);
+      const prefill = rule.prefill && rule.prefill[checkedValues(rule.entry)[0]];
+      if (wrapper.hidden && prefill) payload.append(`entry.${entry}`, prefill);
+    });
+    payload.append('pageHistory', GOOGLE_PAGE_HISTORY);
+    payload.append('fvv', '1');
+    return payload;
+  }
+
+  form.addEventListener('change', (event) => {
+    enforceExclusive(event.target);
+    applyConditions();
+    const wrapper = event.target.closest('.survey-question');
+    if (wrapper && wrapper.classList.contains('has-error')) {
+      const q = QUESTIONS.find(item => String(item.entry) === wrapper.dataset.entry);
+      const message = questionError(q, wrapper);
+      wrapper.classList.toggle('has-error', Boolean(message));
+      wrapper.querySelector('.survey-error').textContent = message;
+    }
+  });
+
+  backBtn.addEventListener('click', () => goToStep(stepFrom(-1)));
+
+  nextBtn.addEventListener('click', () => {
+    if (validateStep(currentStep)) goToStep(stepFrom(1));
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!validateStep(currentStep)) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    submitError.hidden = true;
+
+    try {
+      // Google Forms does not send CORS headers, so the response is opaque:
+      // a resolved fetch means the request reached Google.
+      await fetch(FORM_RESPONSE_URL, { method: 'POST', mode: 'no-cors', body: buildPayload() });
+      gtag('event', 'survey_submit');
+      form.hidden = true;
+      document.querySelector('.survey-progress').hidden = true;
+      const thanks = document.getElementById('surveyThanks');
+      thanks.hidden = false;
+      thanks.focus({ preventScroll: true });
+      surveyMain.scrollTo({ top: surveyCard.offsetTop - 16, behavior: 'smooth' });
+    } catch (err) {
+      submitError.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+
+  renderSteps();
+  applyConditions();
+  showStep(0);
+</script>
+</html>
