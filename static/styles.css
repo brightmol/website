@@ -398,6 +398,94 @@ a {
   transform: translateY(-1px);
 }
 
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.6rem;
+  max-width: 100%;
+  padding: 0.35rem 0.9rem 0.35rem 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* A soft light band sweeps across once, then rests: the pause is what makes
+   the movement noticeable without competing with the animated hero title. */
+.hero-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.17) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: pillShine 7s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes pillShine {
+  0% {
+    transform: translateX(-100%);
+  }
+  28%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.hero-pill:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.hero-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.65rem 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--teal-700);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* "Live" indicator: switches between green and grey every second. */
+.hero-pill-dot {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #5ee08a;
+  animation: liveBlink 2s step-end infinite;
+}
+
+@keyframes liveBlink {
+  0% {
+    background: #5ee08a;
+  }
+  50% {
+    background: #9aa8a8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pill::after,
+  .hero-pill-dot {
+    animation: none;
+  }
+}
+
 .scroll-cue {
   position: absolute;
   left: 50%;
@@ -1010,6 +1098,19 @@ a {
   font-weight: 700;
 }
 
+.contacts-survey {
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+  color: rgba(224, 242, 242, 0.85);
+}
+
+.contacts-survey a {
+  font-weight: 700;
+  color: #e0f2f2;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .footer-piva {
   display: flex;
   justify-content: space-between;
@@ -1325,6 +1426,17 @@ a {
 
   .contacts-text {
     font-size: 1.1rem;
+  }
+
+  .hero-pill {
+    gap: 0.4rem;
+    padding-right: 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .hero-pill-tag {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
   }
 
   .footer-piva {
