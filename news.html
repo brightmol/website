@@ -97,6 +97,8 @@
     </header>
 
     <section class="news-inner" aria-label="News posts">
+      <!-- One button per `category` in news/posts.js. -->
+      <div class="news-filters" id="newsFilters" role="group" aria-label="Show news by category" hidden></div>
       <div class="news-grid" id="newsGrid"></div>
       <p class="news-empty" id="newsEmpty" hidden>
         No news here yet. You can find our latest updates on
@@ -195,8 +197,8 @@
   // Label and date row, shared by the card and the full post.
   function metaRow(post) {
     const meta = el('div', 'news-card-meta');
-    const source = post.source || (post.url && isLinkedIn(post.url) ? 'LinkedIn' : '');
-    if (source) meta.append(el('span', 'news-tag', source));
+    const label = post.category || post.source || (post.url && isLinkedIn(post.url) ? 'LinkedIn' : '');
+    if (label) meta.append(el('span', 'news-tag', label));
     const time = el('time', 'news-card-date', formatDate(post));
     time.dateTime = post.date;
     meta.append(time);
@@ -393,11 +395,40 @@
   if (highlighted) renderHighlight(highlighted);
 
   if (!hasDialog) newsGrid.classList.add('no-dialog');
-  listed.forEach((post, index) => newsGrid.append(renderPost(post, index === 0)));
+
+  // Shows the posts of one category, or all of them when `category` is empty.
+  // The newest post shown gets the large card.
+  function renderList(category) {
+    clampedCards.length = 0;
+    const shown = category ? listed.filter(post => post.category === category) : listed;
+    newsGrid.replaceChildren(...shown.map((post, index) => renderPost(post, index === 0)));
+    updateReadMore();
+  }
+
+  // Filter buttons: "All" plus one per category, shown only when there is
+  // more than one category to choose from.
+  const filters = document.getElementById('newsFilters');
+  const categories = [...new Set(listed.map(post => post.category).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+  if (categories.length > 1) {
+    const buttons = ['', ...categories].map(category => {
+      const button = el('button', 'news-filter', category || 'All');
+      button.type = 'button';
+      button.setAttribute('aria-pressed', String(!category));
+      button.addEventListener('click', () => {
+        buttons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+        renderList(category);
+      });
+      return button;
+    });
+    filters.append(...buttons);
+    filters.hidden = false;
+  }
+
+  renderList('');
   document.getElementById('newsEmpty').hidden = listed.length > 0;
 
   // Whether a text is cut off depends on the card width and the loaded fonts.
-  updateReadMore();
   window.addEventListener('resize', () => requestAnimationFrame(updateReadMore));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateReadMore);
 

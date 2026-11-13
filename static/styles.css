@@ -1990,6 +1990,42 @@ button.btn:disabled {
   }
 }
 
+.news-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.news-filter {
+  padding: 0.4rem 0.95rem;
+  border: 1px solid var(--teal-100);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--teal-900);
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.news-filter:hover {
+  border-color: var(--teal-700);
+}
+
+.news-filter[aria-pressed="true"] {
+  background: var(--teal-100);
+  border-color: var(--teal-700);
+}
+
+.news-filter:focus-visible {
+  outline: 2px solid var(--teal-700);
+  outline-offset: 2px;
+}
+
 .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));

@@ -16,9 +16,19 @@
 //   text      required  the full body; line breaks are kept and web addresses
 //                       become links. Write it between backticks (`...`) to
 //                       paste several paragraphs as they are.
+//   category  optional  the label on the card; the page has a button for each
+//                       category to show only those posts. In use so far:
+//                         "Milestones"  selections, programmes, new steps
+//                         "Events"      conferences, pitches, summits
+//                         "Visits"      meeting companies and institutes
+//                         "Media"       TV, press, interviews
+//                         "Updates"     team life, surveys, other news
+//                       Spell it the same way each time; a new name simply
+//                       adds a new button.
 //   title     optional  headline above the text
-//   source    optional  small label on the card, e.g. "LinkedIn", "Press",
-//                       "Event" (default: "LinkedIn" for linkedin.com links)
+//   source    optional  label shown when there is no category, and the label
+//                       of the coloured highlight box (default: "LinkedIn"
+//                       for linkedin.com links)
 //   url       optional  secondary link (the LinkedIn post, an article, a page
 //                       of this site such as "survey.html")
 //   linkLabel optional  link text (default: "View on LinkedIn" / "Learn more")
@@ -38,7 +48,7 @@
 // Template:
 //   {
 //     date: "2026-11-20",
-//     source: "LinkedIn",
+//     category: "Events",
 //     title: "",
 //     text: `First paragraph.
 //
@@ -50,8 +60,28 @@
 
 window.NEWS_POSTS = [
   {
+    id: "2026-11-13-salk-institute",
+    date: "2026-11-13",
+    category: "Visits",
+    title: "Visiting the Salk Institute in San Diego",
+    text: `During our time in San Diego, we had the opportunity to visit the Salk Institute for Biological Studies, one of the world's leading research institutions.
+A truly inspiring place, where scientific excellence, innovation, and curiosity come together, and where research is at the very heart of everything.
+Beyond discovering its remarkable environment, we had the pleasure of meeting researchers, exchanging ideas, and sharing perspectives on science and innovation.
+At BrightMol Biotech, we strongly believe that progress comes from connecting expertise, sharing knowledge, and building bridges between different research communities.
+We hope these conversations will be the starting point for new opportunities and collaborations.
+A big thank you to everyone who made this visit possible!
+
+#BrightMolBiotech #SalkInstitute #Biotechnology #DrugDiscovery #ScientificCollaboration #SanDiego`,
+    images: [
+      "news/images/2026-11-13-salk-institute-1.jpg",
+      "news/images/2026-11-13-salk-institute-2.jpg"
+    ],
+    imageAlt: "The central courtyard of the Salk Institute, with its concrete buildings on either side and the Pacific Ocean in the distance"
+  },
+  {
     id: "2026-11-05-gate-bioscience",
     date: "2026-11-05",
+    category: "Visits",
     title: "Visiting Gate Bioscience in the San Francisco Bay Area",
     text: `During Ilaria Zeni's stay in California, on Monday, November 2nd, BrightMol had the pleasure of visiting the team at Gate Bioscience in Brisbane, in the San Francisco Bay Area.
 Building on our existing collaboration, this visit was a great opportunity to meet in person, strengthen our relationship, and further explore shared scientific and business perspectives.
@@ -72,6 +102,7 @@ Thank you again for the warm welcome and a very productive afternoon.
   {
     id: "2026-11-04-womens-venture-summit",
     date: "2026-11-04",
+    category: "Events",
     title: "At the Women's Venture Summit, San Diego Startup Week",
     text: `✨ Celebrating women in entrepreneurship at San Diego Startup Week!
 BrightMol Biotech had the pleasure of participating in the Women's Venture Summit during San Diego Startup Week!
@@ -93,6 +124,7 @@ Stronger together! 💪
   {
     id: "2026-11-04-trentino-tv",
     date: "2026-11-04",
+    category: "Media",
     title: "BrightMol on Trentino TV",
     text: `Yesterday, BrightMol had the pleasure to share its story on Trentino TV.
 
@@ -110,6 +142,7 @@ If you’d like to hear our story in full, the video is now available 👉 https
   {
     id: "2026-10-31-uc-san-diego-ige",
     date: "2026-10-31",
+    category: "Visits",
     title: "Visiting the Institute for the Global Entrepreneur at UC San Diego",
     text: `During our journey in San Diego, we had the pleasure of visiting the Institute for the Global Entrepreneur UC San Diego.
 We had the opportunity to present our elevator pitch, exchange ideas with experienced professionals, and receive valuable feedback and expert advice to help us refine our vision and strengthen our business approach.
@@ -128,6 +161,7 @@ A big thank you to the team for the warm welcome and their insights. 🤝
   {
     id: "2026-10-30-aquillius",
     date: "2026-10-30",
+    category: "Visits",
     title: "Visiting Aquillius in San Diego",
     text: `As part of our journey in the US, we had the opportunity to visit Aquillius in San Diego.
 It was a great opportunity to learn more about an ecosystem that brings together scientific innovation, entrepreneurship, and the resources needed to turn promising ideas into real-world solutions.
@@ -147,6 +181,7 @@ A big thank you to the Aquillius team for the opportunity to connect. 🤝
   {
     id: "2026-10-30-market-survey",
     date: "2026-10-30",
+    category: "Updates",
     title: "Help us shape faster compound validation",
     text: `🧪 Are you working on innovative drugs or protein degraders?
 
@@ -162,6 +197,7 @@ A big thank you to the Aquillius team for the opportunity to connect. 🤝
   {
     id: "2026-10-29-survey-live",
     date: "2026-10-29",
+    category: "Updates",
     highlight: true,
     source: "Survey open",
     title: "Our market survey is live",
@@ -172,6 +208,7 @@ A big thank you to the Aquillius team for the opportunity to connect. 🤝
   {
     id: "2026-10-23-san-diego-start",
     date: "2026-10-23",
+    category: "Milestones",
     title: "BrightMol starts its US journey in San Diego",
     text: `On October 19, BrightMol Biotech began its journey in San Diego to explore the US market, connect with the local biotech ecosystem, and unlock new opportunities for growth.
 Excited for what’s ahead! 🚀🧬
@@ -182,6 +219,7 @@ Excited for what’s ahead! 🚀🧬
   {
     id: "2026-10-21-mit4ls",
     date: "2026-10-21",
+    category: "Events",
     title: "BrightMol at Meet in Italy for Life Sciences",
     text: `🚀 Last week, we had the pleasure of attending MIT4LS, a great opportunity to network, connect with new people, and exchange ideas with professionals and innovators.
 
@@ -196,6 +234,7 @@ A big thank you to everyone we met and had the opportunity to exchange ideas and
   {
     id: "2026-09-19-strategy-day",
     date: "2026-09-19",
+    category: "Updates",
     title: "A productive Saturday at BrightMol",
     text: `A productive Saturday at BrightMol 🧠
 
@@ -214,6 +253,7 @@ Thanks to Trentino Sviluppo S.p.A. for hosting us at TSpace and supporting momen
   {
     id: "2026-09-14-dayone-kickoff",
     date: "2026-09-14",
+    category: "Events",
     title: "DayOne Accelerator kick-off in Basel",
     text: `🚀 Last week, our CEO Ilaria Zeni joined the kick-off of the DayOne Accelerator in Basel!
 
@@ -237,6 +277,7 @@ Excited for what’s ahead! 🧬🔬
   {
     id: "2026-08-19-dayone-selected",
     date: "2026-08-19",
+    category: "Milestones",
     title: "Selected for the DayOne Accelerator 2026",
     text: `🚀 We are excited to announce that we were selected for the DayOne Accelerator 2026!
 
@@ -250,6 +291,7 @@ Excited for what’s ahead! 🧬🔬
   {
     id: "2026-07-29-genesis4lifescience",
     date: "2026-07-29",
+    category: "Milestones",
     title: "Selected for Genesis4LifeScience, the innovation programme of Meet in Italy for Life Sciences 2026",
     text: `Can't wait to start this new adventure! 🚀 🧪`,
     url: "https://www.linkedin.com/feed/update/urn:li:activity:7488154292319842304/"
@@ -257,6 +299,7 @@ Excited for what’s ahead! 🧬🔬
   {
     id: "2026-06-09-biomedical-valley",
     date: "2026-06-09",
+    category: "Events",
     title: "Presenting at the Biomedical Valley Innovation Summit",
     text: `Today we are presenting BrightMol Biotech at the Biomedical valley Innovation Summit🎉
 
@@ -270,6 +313,7 @@ Looking forward to expanding our network and meeting new faces!
   {
     id: "2026-03-27-premio-cambiamenti",
     date: "2026-03-27",
+    category: "Events",
     title: "Presenting at Premio Cambiamenti Nord-Est",
     text: `Last week, we had the opportunity to present BrightMol Biotech at the Nord-Est qualifications of the Premio Cambiamenti, organized by CNA.
 It was a valuable experience to showcase our work, connect with inspiring startups, and expand our professional network while meeting talented individuals from across the ecosystem.
