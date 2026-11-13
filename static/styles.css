@@ -1839,6 +1839,397 @@ button.btn:disabled {
   }
 }
 
+/* News page */
+
+/* Seven nav entries no longer fit at the full 2rem spacing on narrow desktop
+   widths, just above the point where the nav collapses into the menu. */
+@media (min-width: 861px) and (max-width: 1200px) {
+  .nav-links {
+    gap: 0.5rem;
+  }
+}
+
+.news-main {
+  position: fixed;
+  inset: var(--nav-height) 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: linear-gradient(to bottom, var(--teal-100), var(--paper) 24rem), var(--paper);
+  padding: 3.5rem 1.5rem 4rem;
+}
+
+.news-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.news-hero {
+  margin-bottom: 2.5rem;
+}
+
+.news-title {
+  font-family: "Quicksand", sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--teal-900);
+  margin-bottom: 1rem;
+}
+
+.news-lede {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  max-width: 62ch;
+  margin-bottom: 1.5rem;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1.5rem;
+  /* Each card is as tall as its own content, instead of a short text-only
+     card being stretched to match a neighbour that has a picture. */
+  align-items: start;
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgb(var(--shadow-rgb) / 0.08);
+  overflow: hidden;
+}
+
+/* A button: clicking the picture opens the full post. */
+.news-card-media {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  aspect-ratio: 16 / 9;
+  background: var(--teal-100);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.news-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Portrait photos are cropped to the card's wide frame: keep the upper
+     part, where faces usually are, rather than the exact middle. */
+  object-position: center 30%;
+  transition: transform 300ms ease;
+}
+
+.news-card-media:hover img {
+  transform: scale(1.03);
+}
+
+.news-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.news-card-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.news-tag {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--teal-100);
+  color: var(--teal-900);
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.news-card-date {
+  opacity: 0.75;
+}
+
+.news-card-title {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--teal-900);
+}
+
+/* Pasted LinkedIn posts can be long: keep their line breaks, but cut the card
+   off after a few lines. "Read more" opens the full post in .news-dialog. */
+.news-card-text {
+  font-size: 1rem;
+  line-height: 1.55;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  overflow: hidden;
+}
+
+.news-card-actions {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+/* Nothing to show: no link, and the whole post already fits on the card. */
+.news-card-actions:not(:has(> :not([hidden]))) {
+  display: none;
+}
+
+.news-card-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--teal-700);
+}
+
+.news-card-link[hidden] {
+  display: none;
+}
+
+.news-card-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Next to "Read more", the link out to LinkedIn takes second place. */
+.news-card-more:not([hidden]) ~ .news-card-link {
+  color: var(--ink);
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.news-card-link:focus-visible,
+.news-dialog-close:focus-visible {
+  outline: 2px solid var(--teal-700);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Browsers without <dialog>: show every post in full on its card instead. */
+.news-grid.no-dialog .news-card-text {
+  display: block;
+}
+
+/* The most recent post spans the full row. */
+.news-card--featured {
+  grid-column: 1 / -1;
+}
+
+.news-card--featured .news-card-title {
+  font-size: 1.7rem;
+}
+
+.news-card--featured .news-card-text {
+  font-size: 1.1rem;
+  max-width: 70ch;
+  -webkit-line-clamp: 10;
+  line-clamp: 10;
+}
+
+@media (min-width: 769px) {
+  .news-card--featured.has-image {
+    flex-direction: row;
+  }
+
+  .news-card--featured .news-card-media {
+    flex: 0 0 45%;
+    aspect-ratio: auto;
+    min-height: 18rem;
+    position: relative;
+  }
+
+  /* Taken out of the flow so the picture fills the height set by the text
+     beside it, rather than its own proportions dictating the card's height. */
+  .news-card--featured .news-card-media img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .news-card--featured .news-card-body {
+    justify-content: center;
+    padding: 2rem 2.25rem;
+  }
+
+  .news-card--featured .news-card-actions {
+    margin-top: 0;
+  }
+}
+
+/* Full post, opened over the page by "Read more" or a news.html#id link. */
+.news-dialog {
+  /* The global reset zeroes every margin, which would pin the dialog to the
+     top-left corner: auto margins are what centre a modal dialog. */
+  margin: auto;
+  width: min(48rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.news-dialog::backdrop {
+  background: rgba(13, 27, 28, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.news-dialog-scroll {
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2rem 2.5rem 2.5rem;
+}
+
+.news-dialog-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--teal-100);
+  color: var(--teal-900);
+  cursor: pointer;
+  transition: transform 180ms ease;
+}
+
+.news-dialog-close:hover {
+  transform: scale(1.08);
+}
+
+.news-dialog-close:focus-visible {
+  border-radius: 50%;
+}
+
+.news-dialog-close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.news-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.news-dialog-content .news-card-meta {
+  /* Keeps the first line clear of the close button. */
+  padding-right: 2.5rem;
+}
+
+.news-dialog-title {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--teal-900);
+}
+
+/* Shown whole (never cropped), but capped so a tall picture doesn't push the
+   text off the screen. */
+.news-dialog-image {
+  display: block;
+  align-self: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(30rem, 60vh);
+  border-radius: 0.75rem;
+}
+
+.news-dialog-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.news-dialog-text a {
+  color: var(--teal-700);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.news-empty {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.news-empty[hidden] {
+  display: none;
+}
+
+.news-empty a {
+  color: var(--teal-700);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .news-main {
+    padding: 2.5rem 1rem 3rem;
+  }
+
+  .news-title {
+    font-size: clamp(1.75rem, 7vw, 2.3rem);
+  }
+
+  .news-lede {
+    font-size: 1.1rem;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-dialog-scroll {
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .news-dialog-title {
+    font-size: 1.5rem;
+  }
+}
+
 /* Dark theme: components whose colours don't come from the theme tokens */
 
 :root[data-theme="dark"] .person-bio {

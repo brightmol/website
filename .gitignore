@@ -1,5 +1,7 @@
-/.q/
+/.t/*
+.t
 *_test.*
 index*.html
 *_legacy.html
 *.pdf
+.lnkd.html
