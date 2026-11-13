@@ -81,14 +81,18 @@
 
   <main class="news-main">
     <header class="news-hero">
-      <div class="news-inner">
-        <p class="section-eyebrow">News</p>
-        <h1 class="news-title">Latest from BrightMol</h1>
-        <p class="news-lede">
-          Announcements, events and milestones from the team. For day-to-day updates,
-          follow us on LinkedIn.
-        </p>
-        <a href="https://www.linkedin.com/company/105721654/" class="btn btn-primary" target="_blank" rel="noopener">Follow us on LinkedIn</a>
+      <div class="news-inner news-hero-inner">
+        <div class="news-hero-copy">
+          <p class="section-eyebrow">News</p>
+          <h1 class="news-title">Latest from BrightMol</h1>
+          <p class="news-lede">
+            Announcements, events and milestones from the team. For day-to-day updates,
+            follow us on LinkedIn.
+          </p>
+          <a href="https://www.linkedin.com/company/105721654/" class="btn btn-primary" target="_blank" rel="noopener">Follow us on LinkedIn</a>
+        </div>
+        <!-- Filled with the post marked `highlight: true` in news/posts.js. -->
+        <aside class="news-highlight" id="newsHighlight" hidden></aside>
       </div>
     </header>
 
@@ -365,9 +369,32 @@
     post.id = idCounts[base] > 1 ? `${base}-${idCounts[base]}` : base;
   });
 
+  // A post marked `highlight: true` is shown in the coloured box beside the
+  // page title instead of in the list, so it stands out from the other news.
+  function renderHighlight(post) {
+    const box = document.getElementById('newsHighlight');
+    const tag = el('span', 'news-highlight-tag');
+    const dot = el('span', 'hero-pill-dot');
+    dot.setAttribute('aria-hidden', 'true');
+    tag.append(dot, post.source || 'Highlight');
+    box.append(tag);
+    if (post.title) box.append(el('h2', 'news-highlight-title', post.title));
+    if (post.text) box.append(el('p', 'news-highlight-text', post.text));
+    if (post.url) {
+      const button = sourceLink(post);
+      button.className = 'btn news-highlight-btn';
+      box.append(button);
+    }
+    box.hidden = false;
+  }
+
+  const highlighted = posts.find(post => post.highlight);
+  const listed = posts.filter(post => post !== highlighted);
+  if (highlighted) renderHighlight(highlighted);
+
   if (!hasDialog) newsGrid.classList.add('no-dialog');
-  posts.forEach((post, index) => newsGrid.append(renderPost(post, index === 0)));
-  document.getElementById('newsEmpty').hidden = posts.length > 0;
+  listed.forEach((post, index) => newsGrid.append(renderPost(post, index === 0)));
+  document.getElementById('newsEmpty').hidden = listed.length > 0;
 
   // Whether a text is cut off depends on the card width and the loaded fonts.
   updateReadMore();

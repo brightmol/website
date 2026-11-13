@@ -1841,6 +1841,32 @@ button.btn:disabled {
 
 /* News page */
 
+/* The News entry in the homepage navbar: a pill outlined in the dark green.
+   It is the only entry there that opens another page instead of scrolling to
+   a section, so it is set apart from the section links. (The other pages
+   don't use it: none of their links are sections.) The outline is an inset
+   shadow rather than a border, so it adds no size. */
+.nav-link--outlined {
+  box-shadow: inset 0 0 0 2px var(--teal-900);
+}
+
+.nav-link--outlined::after {
+  display: none;
+}
+
+.nav-link--outlined:hover:not(.is-active) {
+  background: var(--teal-100);
+}
+
+@media (max-width: 860px) {
+  /* In the slide-in menu the links are full-width rows: keep this one a pill. */
+  .nav-link--outlined {
+    width: auto;
+    margin: 0.6rem 0;
+    padding: 0.5rem 1.1rem;
+  }
+}
+
 /* Seven nav entries no longer fit at the full 2rem spacing on narrow desktop
    widths, just above the point where the nav collapses into the menu. */
 @media (min-width: 861px) and (max-width: 1200px) {
@@ -1881,6 +1907,87 @@ button.btn:disabled {
   line-height: 1.55;
   max-width: 62ch;
   margin-bottom: 1.5rem;
+}
+
+.news-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 27rem);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* The highlighted post (`highlight: true` in news/posts.js). Its colours are
+   fixed rather than taken from the theme tokens, so that it stays a dark teal
+   block with white text in both themes and never looks like a news card. */
+.news-highlight {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1.75rem 2rem 2rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #37888a, #255657);
+  color: #fff;
+  box-shadow: 0 16px 40px rgb(var(--shadow-rgb) / 0.22);
+  overflow: hidden;
+}
+
+.news-highlight[hidden] {
+  display: none;
+}
+
+.news-highlight-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.news-highlight-title {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.news-highlight-text {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: pre-line;
+}
+
+.news-highlight-btn {
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  padding: 0.7rem 1.4rem;
+  background: #fff;
+  color: #255657;
+}
+
+.news-highlight-btn:hover {
+  background: #e0f2f2;
+  transform: translateY(-1px);
+}
+
+.news-highlight-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .news-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
 .news-grid {

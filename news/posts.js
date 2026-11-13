@@ -27,6 +27,10 @@
 //                       ["news/images/a.jpg", "news/images/b.jpg"].
 //                       The first is the one on the card.
 //   imageAlt  optional  description of the (first) picture for screen readers
+//   highlight optional  true shows this post in the coloured box next to the
+//                       page title instead of in the list, so it stands out.
+//                       Only one post is shown there (the newest one marked);
+//                       remove the line to turn it back into a normal card.
 //   id        optional  the post's address is news.html#id. Default: the date
 //                       (news.html#2026-11-20). Set it when two posts share a
 //                       date and you want their links to stay fixed.
@@ -154,6 +158,16 @@ A big thank you to the Aquillius team for the opportunity to connect. 🤝
 
 #degraders #drugdiscovery`,
     url: "https://www.linkedin.com/feed/update/urn:li:activity:7521947276714618882/"
+  },
+  {
+    id: "2026-10-29-survey-live",
+    date: "2026-10-29",
+    highlight: true,
+    source: "Survey open",
+    title: "Our market survey is live",
+    text: "We are building a faster way to test and validate compounds in living cells. Are you working on new drugs or protein degraders? Help us understand your needs with a short, confidential questionnaire. Your input will shape solutions for real industry challenges.",
+    url: "survey.html",
+    linkLabel: "Take the 5-minute survey"
   },
   {
     id: "2026-10-23-san-diego-start",
